@@ -40,10 +40,8 @@ footer a {
   color: #ff3d62;
 }
 
-#panel-wrapper .post-tag {
-  border: 1px solid var(--btn-border-color);
-}
-
-.post-tag {
-  color: #ff3d62;
+#panel-wrapper .post-tag:hover {
+  background-color:#ff3d62;
+  border-color:#ff3d62;
+  color: #fff;
 }
