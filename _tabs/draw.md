@@ -1,6 +1,6 @@
 ---
 layout: draw
 icon: fas fa-wand-magic-sparkles
-order: 2
-permalink: https://draw.aptura.link
+order: 1
+permalink: /draw/index.html
 ---
