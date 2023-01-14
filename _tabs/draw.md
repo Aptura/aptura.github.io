@@ -1,5 +1,6 @@
 ---
 icon: fas fa-wand-magic-sparkles
 order: 1
-page.path: /draw/draw.html
+page.dir: /draw/
+page.content: draw.html
 ---
