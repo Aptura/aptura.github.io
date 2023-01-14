@@ -40,6 +40,10 @@ footer a {
   color: #ff3d62;
 }
 
-#access-tags a {
+#panel-wrapper .post-tag {
+  border: 1px solid var(--btn-border-color)
+}
+
+.post-tag {
   color: #ff3d62;
 }
