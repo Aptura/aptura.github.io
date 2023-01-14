@@ -1,7 +1,7 @@
 ---
 ---
 
-@import "_sass\jekyll-theme-chirpy.scss";
+@import "{{ site.theme }}";
 
 /* append your custom style below */
   a {
