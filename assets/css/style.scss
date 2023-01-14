@@ -40,6 +40,11 @@ footer a {
   color: #ff3d62;
 }
 
+nav[data-toggle="toc"] .nav > li > a:focus, nav[data-toggle="toc"] .nav > li > a:hover {
+  color: #ff3d62;
+  border-left: 1px solid #ff3d62;
+}
+
 #related-posts .card h3, h1 + .post-meta em a, h1 + .post-meta em, footer a {
   color: #ff3d62;
 }
