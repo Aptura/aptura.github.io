@@ -40,6 +40,29 @@ footer a {
   color: #ff3d62;
 }
 
+.post-navigation .btn {
+  width: 50%;
+  position: relative;
+  border-color: var(--btn-border-color);
+  color: #ff3d62;
+}
+
+.post-navigation .btn:hover {
+  background: #ff3d62;
+  color: #fff;
+  border-color: #ff3d62;
+}
+
+.post-tag:hover {
+  border-bottom: none;
+  text-decoration: none;
+  color: #ff3d62;
+}
+
+.post-tail-wrapper .license-wrapper > a {
+  color: #ff3d62;
+}
+
 #related-posts .card h3, h1 + .post-meta em a, h1 + .post-meta em, footer a {
   color: #ff3d62;
 }
