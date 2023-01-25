@@ -2,7 +2,7 @@
 title: Hello World
 author: Aptura 
 date: 2023-01-03 21:34:00 +0800
-categories: [Hello World, Présentation]
+categories: [Blogging]
 tags: [présentation]
 ---
 
