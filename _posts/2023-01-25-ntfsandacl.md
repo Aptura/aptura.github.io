@@ -10,11 +10,12 @@ img_path: /assets/img/windows/ntfs/
 Voici un article sur la sécurité NTFS et les ACL (Access Control List) sous windows. C'est une notion qui semble assez difficile a cerner et à appliquer. Cet article me servira également de mémo personnel, étant beaucoup moins à l'aise sous windows.
 
 ## Définir les ACL
+
 Sur un volume formaté en NTFS ( New Technology File System), tous les répertoires et tous les fichiers sont soumis à la sécurité NTFS, que l'on appelle ACL (Access Control List), ses dernières sont une sorte de bouclier attribué à chaque items sur windows (fichiers, dossiers ...). Cela ce traduit par des autorisations ou non, d'accès, modification, lecture ...
 
 ## Fonctionnement
 
-Le fonctionnement est assez simple, quand vous souhaitez entrer dans un dossier, les ACL vont vous challenger, une popup s'affiche, contrôle grâce à un jeton d'accès si l'utilisateur qui souhaite entrer dans le dossier possède les droits. 
+Le fonctionnement est assez simple, quand vous souhaitez entrer dans un dossier, les ACL vont vous challenger, une popup s'affiche, contrôle grâce à un jeton d'accès si l'utilisateur qui souhaite entrer dans le dossier possède les droits.
 
 Toutes les autorisations sont stockées dans l'index du système de fichier NTFS. Ces autorisations sont modifiables dans l'onglet sécurité (dans les propriété) d'un item.
 
@@ -37,7 +38,7 @@ Dans le cas d'un utilisateur qui ferait partie de plusieurs groupes, avec pour c
 > Notez bien que cette notion est très importante à saisir, car dans contexte d'entreprise où nous retrouvons beaucoup d'employé, la gestion peut-être très difficile.
 {: .prompt-warning}
 
-## Le mécanisme d'héritage 
+## Le mécanisme d'héritage
 
 Cela concerne les répertoires. En effet, lors de la création d'un dossier, les droits posé sur ce dossier serons automatiquement transmis à ses objets enfants. Dossier qui lui-même récupère ses droits en fonction de la partition (volume racine) où il est stocké.
 
@@ -58,10 +59,9 @@ Voici un tableau pour comprendre comment se comporte l'héritage lors d'un dépl
 |Déplacement | Conservation           | Héritage                       |
 |Copie       | Héritage               | Héritage                       |
 
+## Les bonnes pratiques
 
-## Les bonnes pratiques 
-
-Une rapide énumération des bonnes pratiques de bases concernant les autorisations et leurs gestions. 
+Une rapide énumération des bonnes pratiques de bases concernant les autorisations et leurs gestions.
 
 * Privilégier au maximum les groupes dans les DACL
 * Utiliser au maximum les ACE de base
