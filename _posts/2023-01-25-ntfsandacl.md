@@ -53,12 +53,11 @@ Dans l'onglet sécurité du dossier :
 
 Voici un tableau pour comprendre comment se comporte l'héritage lors d'un déplacement ou d'une copie de fichier.
 
-|Même volume / partition | Différent volumes / partitions |
-|------------------------|--------------------------------|
-| Conservation           | Héritage                       |
-| Héritage               | Héritage                       |
+|            |Même volume / partition | Différent volumes / partitions |
+|------------|------------------------|--------------------------------|
+|Déplacement | Conservation           | Héritage                       |
+|Copie       | Héritage               | Héritage                       |
 
-La première ligne du tableau concerne le déplacement et la deuxième ligne, la copie.
 
 ## Les bonnes pratiques 
 
