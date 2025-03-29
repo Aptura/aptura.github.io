@@ -1,0 +1,195 @@
+/* Polices */
+@font-face {
+    font-family: 'alagard';
+    src: url('../font/alagard.ttf') format('truetype');
+}
+
+/* Réinitialisation des styles de base */
+body, html {
+    background-image: url("../img/graphy.png");
+    background-repeat: repeat;
+    background-color: #c0c0c0;
+    margin: 0;
+    padding: 0;
+    font-family: "alagard", Arial, sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+}
+
+/* Section principale */
+section p {
+    margin: 0 0 25px 0;
+    text-align: justify;
+}
+
+/* Mise en page globale */
+header, main, footer {
+    max-width: 730px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+main {
+    padding: 0 100px;
+    font-size: 115%;
+}
+
+h1, h2 {
+    margin: 15px 0;
+    font-size: 220%;
+    font-weight: bold;
+}
+
+/* Styles pour le pied de page */
+.footer {
+    color: #FBFBFB;
+    text-align: center;
+    position: sticky; /* Modifiez la position en "sticky" */
+    bottom: 0; /* Fixez le pied de page en bas de la page */
+    width: 100%;
+    padding: 60px 0;
+    overflow: hidden;
+    margin-top: 115px;
+    background-color: #000000;
+    z-index: 2; /* Assurez-vous que le pied de page est au-dessus du contenu */
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: -1;
+}
+
+.footer-content {
+    align-items: center;
+    font-family: "alagard", Arial;
+}
+
+/* Effet de survol pour les liens du pied de page */
+.footer-content a:hover {
+    color: #ff7b00;
+}
+
+.footer-content a {
+    text-decoration: none;
+    color: #FBFBFB;
+    transition: color 0.3s;
+}
+
+/* Conteneur d'images */
+.image-container {
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 65%;
+    height: auto;
+}
+
+/* Menu Burger */
+.menu-button {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100; /* Assure-toi qu'il est au-dessus de tout autre élément */
+    width: 50px; /* Taille du bouton */
+    height: 50px; /* Taille du bouton */
+    padding: 10px; /* Pour garantir un espace autour de l'icône */
+}
+
+/* Menu */
+.menu {
+    display: none; /* Cacher le menu par défaut sur mobile */
+    flex-direction: column;
+    align-items: center;
+    color: #FFF;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    transform: translateX(-100%); /* Cacher le menu en dehors de l'écran */
+    transition: transform 0.3s ease;
+    z-index: 99; /* S'assurer que le menu est en dessous du bouton burger */
+}
+
+/* Menu ouvert quand .open est ajouté */
+.menu.open {
+    display: flex; /* Afficher le menu lorsque l'on ajoute la classe "open" */
+    transform: translateX(0); /* Déplacer le menu dans l'écran */
+}
+
+.menu li {
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+
+.menu a {
+    font-size: 130%;
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.3s;
+    display: block;
+}
+
+.menu a:hover {
+    color: #2b7549;
+}
+
+/* Liens */
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #583a31;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #327e62;
+}
+
+/* Comportement pour les écrans mobiles */
+@media (max-width: 768px) {
+    /* Afficher le bouton menu uniquement sur mobile */
+    .menu-button {
+        display: block;  /* Afficher le bouton burger sur les petits écrans */
+    }
+
+    /* Cacher le menu sur les écrans mobiles par défaut */
+    .menu {
+        display: none;  /* Cacher le menu burger par défaut */
+    }
+
+    .menu.open {
+        display: flex;  /* Afficher le menu lorsqu'il est ouvert */
+    }
+}
+
+/* Comportement pour les écrans de bureau */
+@media (min-width: 769px) {
+    /* Cacher le bouton menu sur les écrans de bureau */
+    .menu-button {
+        display: none;
+    }
+
+    /* Afficher le menu directement sur les écrans de bureau */
+    .menu {
+        display: flex;  /* Afficher le menu sur grand écran */
+        transform: translateX(0);  /* Le menu est déjà visible */
+    }
+}
