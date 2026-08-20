@@ -1,0 +1,341 @@
+/* ============================================================
+   RNRD — MODE TERRAIN
+   -------------------------------------------------------------
+   Feuille complémentaire, chargée APRÈS rnrd.css et uniquement
+   sur les pages de la section Terrain.
+
+   Principe : ne rien réécrire. Toute la mise en forme du site
+   étant pilotée par variables, il suffit de les redéfinir pour
+   que l'ensemble bascule — mêmes filets, mêmes espacements,
+   même grammaire, palette inversée.
+
+   L'idée n'est pas un autre site, mais le même instrument en
+   configuration nocturne.
+
+   Palette relevée sur le camouflage de référence :
+     noir profond   #0b0b0b
+     anthracite     #252525
+     olive sourd    #3a382c
+   Accent : ambre sourd, la teinte d'un rétroéclairage
+   d'instrument. Employé aussi rarement que le bleu ailleurs.
+   ============================================================ */
+
+:root{
+  /* — surfaces — */
+  --bg:#0e0f0d;
+  --bg-2:#161714;
+  --bg-3:#1d1e1a;
+
+  /* — encres — */
+  --ink:#e8e6df;
+  --ink-soft:#9d9b90;
+  --ink-faint:#6b6a61;
+
+  /* — filets — */
+  --line:#2a2b26;
+  --line-strong:#3d3e37;
+
+  /* — accent — */
+  --accent:#c2884a;
+  --accent-soft:#2a2119;
+
+  /* — lueurs — */
+  --glow-1:rgba(194,136,74,.05);
+  --glow-2:rgba(58,56,44,.14);
+
+  /* — propres au mode terrain — */
+  --olive:#3a382c;
+  --camo-opacity:.16;
+}
+
+/* le fond clair d'origine ne doit pas transparaître au chargement */
+html{ background:var(--bg); }
+::selection{ background:var(--accent-soft); color:var(--ink); }
+
+/* ------------------------------------------------------------
+   TRAME DE CAMOUFLAGE
+   Fixée à la fenêtre, très assourdie : une matière, pas un motif
+   à regarder. Elle ne passe jamais derrière le texte courant,
+   seulement derrière l'en-tête et les panneaux.
+   ------------------------------------------------------------ */
+body::before{
+  /* on conserve le repère de coupe hérité, la trame est ajoutée
+     sur un calque distinct */
+  z-index:2;
+}
+
+.camo-field{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:url('img/camo.jpg');
+  background-size:760px 760px;
+  background-repeat:repeat;
+  opacity:var(--camo-opacity);
+  /* dégradé de disparition : la trame s'efface là où le texte
+     commence, pour ne jamais gêner la lecture */
+  -webkit-mask-image:linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 38%, transparent 68%);
+  mask-image:linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 38%, transparent 68%);
+}
+
+/* ------------------------------------------------------------
+   EN-TÊTE DE SECTION
+   ------------------------------------------------------------ */
+
+.brief{
+  border:var(--hair) solid var(--line-strong);
+  border-radius:var(--radius);
+  background:rgba(20,21,18,.72);
+  backdrop-filter:blur(2px);
+  padding:26px 28px;
+  margin:0 0 64px;
+}
+.brief-label{
+  font-size:10px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:500;
+  margin:0 0 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brief-label::before{
+  content:"";
+  width:6px; height:6px;
+  background:var(--accent);
+  flex:0 0 auto;
+}
+.brief p{
+  margin:0 0 1.1em;
+  font-size:15px;
+  line-height:1.72;
+  color:var(--ink-soft);
+  max-width:62ch;
+}
+.brief p:last-child{ margin-bottom:0; }
+@media (max-width:560px){ .brief{ padding:22px 20px; } }
+
+/* ------------------------------------------------------------
+   FICHES D'INSTRUCTION
+   Même structure que la liste d'articles, mais chaque entrée
+   porte un code et un état plutôt qu'une vignette.
+   ------------------------------------------------------------ */
+
+.fiches{ display:flex; flex-direction:column; }
+
+/* intertitre de groupe : les fiches s'enchaînent dans un ordre de
+   progression, du repérage à l'alerte. Le groupe le rend lisible
+   sans découper la liste en blocs séparés. */
+.fiches-group{
+  font-size:9.5px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:500;
+  margin:34px 0 4px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.fiches-group:first-child{ margin-top:0; }
+.fiches-group::after{
+  content:"";
+  flex:1;
+  height:var(--hair);
+  background:var(--line);
+}
+/* une fiche qui suit un intertitre n'a pas besoin de son filet */
+.fiches-group + .fiche{ border-top:none; }
+
+.fiche{
+  display:grid;
+  grid-template-columns:58px 1fr auto;
+  align-items:baseline;
+  gap:22px;
+  padding:24px 0;
+  border-top:var(--hair) solid var(--line);
+  text-decoration:none;
+  color:inherit;
+  transition:padding-left .3s cubic-bezier(.2,.8,.3,1), opacity .25s ease;
+}
+.fiches .fiche:first-child{ border-top:none; padding-top:6px; }
+a.fiche:hover{ padding-left:8px; }
+.fiche.pending{ cursor:default; }
+.fiche.pending .fiche-name,
+.fiche.pending .fiche-desc{ color:var(--ink-faint); }
+
+.fiche-code{
+  font-size:10px;
+  letter-spacing:.18em;
+  color:var(--ink-faint);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+a.fiche .fiche-code{ color:var(--accent); }
+
+.fiche-name{
+  font-family:'Manrope', sans-serif;
+  font-weight:400;
+  font-size:19px;
+  letter-spacing:.02em;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+.fiche-desc{
+  font-size:13.5px;
+  line-height:1.6;
+  color:var(--ink-soft);
+  font-weight:300;
+  max-width:56ch;
+}
+.fiche-state{
+  font-size:9.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  white-space:nowrap;
+}
+a.fiche .fiche-state{ color:var(--ink-soft); }
+
+@media (max-width:600px){
+  .fiche{ grid-template-columns:1fr auto; gap:12px 16px; }
+  .fiche-code{ grid-column:1 / -1; }
+  .fiche-desc{ display:none; }
+}
+
+/* ------------------------------------------------------------
+   PROCÉDURE — suite d'opérations numérotées
+   ------------------------------------------------------------ */
+
+.procedure{ counter-reset:etape; margin:44px 0; }
+
+.etape{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:22px;
+  padding:22px 0;
+  border-top:var(--hair) solid var(--line);
+}
+.procedure .etape:first-child{ border-top:none; }
+.etape::before{
+  counter-increment:etape;
+  content:counter(etape, decimal-leading-zero);
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--accent);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+  padding-top:4px;
+}
+.etape-titre{
+  font-family:'Manrope', sans-serif;
+  font-weight:400;
+  font-size:17px;
+  letter-spacing:.02em;
+  color:var(--ink);
+  margin:0 0 8px;
+}
+.etape p{
+  font-size:15px !important;
+  line-height:1.75 !important;
+  color:var(--ink-soft) !important;
+  margin:0 0 .9em !important;
+  max-width:60ch;
+}
+.etape p:last-child{ margin-bottom:0 !important; }
+@media (max-width:560px){
+  .etape{ grid-template-columns:32px 1fr; gap:14px; }
+}
+
+/* ------------------------------------------------------------
+   SÉPARATION DES FICHES
+   Les fiches s'enchaînent dans la même page : un filet et une
+   respiration marquent le passage de l'une à l'autre, et le
+   décalage d'ancre évite qu'une fiche appelée par lien ne se colle
+   au bord haut de la fenêtre.
+   ------------------------------------------------------------ */
+
+article.body[id]{
+  scroll-margin-top:88px;
+  margin-top:104px;
+  padding-top:64px;
+  border-top:var(--hair) solid var(--line-strong);
+}
+article.body[id]:first-of-type{ }
+
+/* ------------------------------------------------------------
+   AVERTISSEMENT
+   Panneau à liseré ambre : sécurité, limite, point de prudence.
+   ------------------------------------------------------------ */
+
+.warn{
+  border-left:2px solid var(--accent);
+  background:rgba(194,136,74,.06);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:20px 24px;
+  margin:44px 0;
+}
+.warn-label{
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:500;
+  margin:0 0 10px;
+}
+.warn p{
+  font-size:14.5px !important;
+  line-height:1.7 !important;
+  color:var(--ink-soft) !important;
+  margin:0 !important;
+  max-width:60ch;
+}
+
+/* ------------------------------------------------------------
+   AJUSTEMENTS HÉRITÉS
+   Quelques blocs conçus pour le fond clair demandent une retouche
+   de contraste, pas de forme.
+   ------------------------------------------------------------ */
+
+.specs-title{ color:var(--accent); }
+.spec-row dd{ color:var(--ink); }
+.note{ background:var(--bg-2); border-left-color:var(--line-strong); }
+.verdict{ background:var(--bg-2); }
+.article-cover, .plate-frame{ background:var(--bg-2); }
+.article-thumb{ background:var(--bg-2); }
+.article-thumb.empty::after{ border-color:var(--line-strong); }
+.article-index{ color:var(--accent); }
+.rating-tick{ background:var(--line-strong); }
+.rating-tick.filled{ background:var(--ink); }
+.pull-quote{ border-left-color:var(--accent); }
+.verdict-label::before{ background:var(--accent); }
+article.body figcaption{ border-left-color:var(--line-strong); }
+.carousel-head{ background:var(--bg-2); }
+.carousel-btn{ background:var(--bg-2); color:var(--ink); }
+.carousel-btn:hover:not(:disabled){ background:var(--accent); border-color:var(--accent); color:var(--bg); }
+.crank, .empty-state{ color:var(--ink-faint); }
+
+/* le contenu passe au-dessus de la trame */
+.wrap{ z-index:2; }
+
+/* ------------------------------------------------------------
+   IMPRESSION
+   La trame et les fonds sombres n'ont aucun intérêt sur papier :
+   la fiche redevient un document noir sur blanc.
+   ------------------------------------------------------------ */
+
+@media print{
+  :root{
+    --bg:#fff; --bg-2:#fff; --bg-3:#fff;
+    --ink:#000; --ink-soft:#333; --ink-faint:#666;
+    --line:#ccc; --line-strong:#999;
+    --accent:#000; --accent-soft:#eee;
+  }
+  .camo-field{ display:none !important; }
+  .brief, .warn{ background:none; border:1pt solid #999; }
+  .etape, .fiche{ page-break-inside:avoid; }
+}

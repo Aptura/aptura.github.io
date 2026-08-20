@@ -1,0 +1,8 @@
+# RNRD — https://rnrd.space
+User-agent: *
+Allow: /
+
+# Scripts de contrôle : aucun intérêt public
+Disallow: /outils/
+
+Sitemap: https://rnrd.space/sitemap.xml

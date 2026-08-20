@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fcfcfb">
+  <meta name="color-scheme" content="light">
+
+  <!-- ⚠ SECTION EN SOMMEIL
+       Cette page existe mais n'est ni liée depuis l'accueil, ni
+       indexée. Pour l'ouvrir : voir GUIDE.md, « Ouvrir une section
+       en sommeil ». Retirer alors la balise robots ci-dessous. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Nécessaire — RNRD</title>
+  <meta name="description"
+    content="Inventaire complet de ce que je possède pour vivre : chaque objet, sa masse, et la raison de sa présence.">
+  <link rel="canonical" href="https://rnrd.space/necessaire/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nécessaire — RNRD">
+  <meta property="og:description" content="Inventaire de ce que je possède pour vivre : chaque objet, sa masse, sa raison d'être.">
+  <meta property="og:url" content="https://rnrd.space/necessaire/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="RNRD">
+  <meta property="og:image" content="https://rnrd.space/assets/img/partage.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="RNRD — vivre avec peu, dehors autant que possible">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Nécessaire — RNRD",
+    "description": "Inventaire de ce que je possède pour vivre : chaque objet, sa masse, sa raison d'être.",
+    "url": "https://rnrd.space/necessaire/",
+    "inLanguage": "fr-FR",
+    "author": { "@type": "Person", "name": "RNRD" },
+    "isPartOf": { "@type": "WebSite", "name": "RNRD", "url": "https://rnrd.space/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "RNRD", "item": "https://rnrd.space/" },
+      { "@type": "ListItem", "position": 2, "name": "Nécessaire", "item": "https://rnrd.space/necessaire/" }
+    ]
+  }
+  </script>
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23a4a49b' stroke-width='1.2'/%3E%3Ccircle cx='16' cy='5' r='2.6' fill='%237f97e3'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23141417'/%3E%3C/svg%3E">
+  <link rel="preload" href="../assets/fonts/inter-v20-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/manrope-v20-latin-200.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/rnrd.css">
+</head>
+
+<body class="centered" data-code="NECESSAIRE">
+
+  <main class="wrap">
+
+    <a class="crumb reveal" href="../index.html"><span class="chev">‹</span> RNRD</a>
+
+    <p class="eyebrow reveal">Nécessaire</p>
+    <h1 class="reveal">Ce qui tient<br>dans deux sacs.</h1>
+    <p class="lede reveal">
+      L'inventaire complet de ce que je possède pour vivre. Chaque objet
+      y figure avec sa masse et, quand ce n'est pas évident, la raison
+      de sa présence. Ce qui n'y est plus a été retiré pour une raison
+      tout aussi précise.
+    </p>
+
+    <!-- Les trois valeurs se calculent seules à partir des lignes
+         d'inventaire : rien à mettre à jour ici. -->
+    <dl class="inv-summary reveal">
+      <div class="inv-cell">
+        <dt>Objets</dt>
+        <dd data-total-objets>—</dd>
+      </div>
+      <div class="inv-cell">
+        <dt>Masse totale</dt>
+        <dd data-total-poids>—</dd>
+      </div>
+      <div class="inv-cell">
+        <dt>Catégories</dt>
+        <dd data-total-categories>—</dd>
+      </div>
+    </dl>
+
+    <!-- ════════════════════════════════════════════════════════════
+         AJOUTER UN OBJET
+
+         <div class="spec-row" data-poids="340">
+           <dt>Nom de l'objet
+             <span class="spec-note">Précision facultative.</span>
+           </dt>
+           <dd>340 g</dd>
+         </div>
+
+         data-poids se déclare TOUJOURS en grammes, sans unité :
+         c'est lui qui alimente les totaux en haut de page.
+         La valeur affichée dans <dd> reste libre.
+
+         Pour créer une catégorie : un <p class="specs-title"> suivi
+         d'un <dl class="specs-grid">.
+         ════════════════════════════════════════════════════════════ -->
+    <div class="specs reveal">
+
+      <p class="specs-title">Portage</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Sommeil</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Vêtements</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Cuisine et eau</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Hygiène et santé</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Outils</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Électronique</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+      <p class="specs-title">Documents et administratif</p>
+      <dl class="specs-grid">
+        <div class="spec-row" data-poids="0">
+          <dt>À compléter</dt>
+          <dd>— g</dd>
+        </div>
+      </dl>
+
+    </div>
+
+    <div class="note reveal">
+      <p class="note-label">Méthode</p>
+      <p>
+        Les masses sont relevées à la balance, emballage retiré, et non
+        reprises des fiches constructeur. Un objet n'entre dans cette
+        liste qu'après avoir servi au moins une fois en conditions
+        réelles.
+      </p>
+    </div>
+
+    <footer class="site-footer reveal">
+      <span class="footer-links">
+        <a href="../projet.html">Le projet</a>
+        <a href="../histoire.html">Histoire</a>
+      </span>
+      <span class="num">RNRD — <span data-year></span></span>
+    </footer>
+  </main>
+
+  <script src="../assets/rnrd.js"></script>
+</body>
+
+</html>

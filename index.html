@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fcfcfb">
+  <meta name="color-scheme" content="light">
+  <title>RNRD</title>
+  <meta name="description"
+    content="Espace personnel. Matériel testé à l'usage, notes et réflexions au fil de l'eau. Vivre avec peu, dehors autant que possible.">
+  <link rel="canonical" href="https://rnrd.space/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RNRD — vivre avec peu, dehors autant que possible">
+  <meta property="og:description"
+    content="Matériel testé à l'usage, notes et réflexions au fil de l'eau. Un espace personnel, sans publicité ni traceur.">
+  <meta property="og:url" content="https://rnrd.space/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="RNRD">
+  <meta property="og:image" content="https://rnrd.space/assets/img/partage.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="RNRD — vivre avec peu, dehors autant que possible">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "RNRD",
+  "url": "https://rnrd.space/",
+  "inLanguage": "fr-FR",
+  "description": "Espace personnel : matériel testé à l'usage, notes et réflexions au fil de l'eau.",
+  "author": { "@type": "Person", "name": "RNRD" },
+  "publisher": { "@type": "Person", "name": "RNRD" }
+}
+</script>
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23a4a49b' stroke-width='1.2'/%3E%3Ccircle cx='16' cy='5' r='2.6' fill='%237f97e3'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23141417'/%3E%3C/svg%3E">
+  <!-- préchargement des deux graisses les plus utilisées :
+     évite le bref changement de police au chargement -->
+  <link rel="preload" href="assets/fonts/inter-v20-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/manrope-v20-latin-200.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/rnrd.css">
+  <style>
+    /* réglages propres à la page d'ancrage */
+
+    .bio {
+      font-size: 18.5px;
+      line-height: 1.76;
+      color: var(--ink-soft);
+      font-weight: 300;
+      max-width: 52ch;
+      margin: 0 0 68px;
+    }
+
+    .bio strong {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* cluster orbital — présent uniquement sur cette page */
+    .orbit {
+      position: fixed;
+      top: 74px;
+      right: 56px;
+      width: 190px;
+      height: 190px;
+      pointer-events: none;
+      opacity: .6;
+      z-index: 0;
+    }
+
+    .orbit svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .orbit .ring {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: .6;
+    }
+
+    .orbit .planet {
+      fill: var(--accent);
+    }
+
+    .orbit .sun {
+      fill: var(--ink-faint);
+    }
+
+    .orbit .quiet-dot {
+      fill: var(--line-strong);
+    }
+
+    .orbit .tick {
+      stroke: var(--line-strong);
+      stroke-width: .6;
+    }
+
+    @media (max-width:820px) {
+      .orbit {
+        width: 120px;
+        height: 120px;
+        top: 52px;
+        right: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body class="centered" data-code="INDEX">
+
+  <div class="orbit" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <!-- Mercure, Vénus, Terre, Mars — vitesses au rapport réel de leurs périodes -->
+      <g transform="translate(128,72)">
+        <circle class="ring" r="20" />
+        <circle class="ring" r="32" />
+        <circle class="ring" r="44" />
+        <circle class="ring" r="56" />
+        <circle class="sun" r="2.6" />
+        <circle class="planet" id="p0" r="1.8" cx="0" cy="-20" />
+        <circle class="planet" id="p1" r="1.8" cx="0" cy="-32" />
+        <circle class="planet" id="p2" r="2.2" cx="0" cy="-44" />
+        <circle class="planet" id="p3" r="2.1" cx="0" cy="-56" />
+      </g>
+      <circle class="ring" cx="34" cy="158" r="13" />
+      <circle class="quiet-dot" cx="34" cy="145" r="1.6" />
+      <line class="tick" x1="176" y1="150" x2="176" y2="160" />
+      <line class="tick" x1="171" y1="155" x2="181" y2="155" />
+    </svg>
+  </div>
+
+  <main class="wrap">
+    <p class="eyebrow reveal">Espace personnel</p>
+    <h1 class="reveal wordmark">RNRD</h1>
+
+    <p class="bio reveal">
+      <!-- Le nom n'est pas masqué : il n'est pas là. Les caractères
+           affichés sont tirés au sort à l'exécution, ceux écrits ici
+           ne servent que si le script ne s'exécute pas. -->
+      Je m'appelle <span class="redacted" data-length="9"
+        role="img" aria-label="Nom volontairement non publié">#4?m%7@q</span>, j'ai 28 ans.
+      Je vis avec peu, dehors autant que possible.
+      Ici, je documente le matériel que je choisis, ce qu'il devient à l'usage,
+      et ce que j'apprends à laisser de côté.
+    </p>
+
+    <p class="section-label reveal">Sections<span class="section-qualifier">Personnel</span><span class="section-count" data-count-modules="1"></span></p>
+    <div class="modules reveal">
+      <a class="module active" href="carnet/index.html">
+        <div class="module-left">
+          <span class="status-dot"></span>
+          <div>
+            <div class="module-name">Carnet</div>
+            <div class="module-desc">Notes, essais rapides et réflexions, au fil de l'eau.</div>
+          </div>
+        </div>
+        <span class="module-tag">Actif <span class="chev">›</span></span>
+      </a>
+
+      <div class="module pending">
+        <div class="module-left">
+          <span class="status-dot"></span>
+          <div>
+            <div class="module-name">Vision</div>
+            <div class="module-desc">Photographie — le dehors tel que je le vois.</div>
+          </div>
+        </div>
+        <span class="module-tag">À venir</span>
+      </div>
+
+      <div class="module pending">
+        <div class="module-left">
+          <span class="status-dot"></span>
+          <div>
+            <div class="module-name">Nécessaire</div>
+            <div class="module-desc">Ce qui tient dans deux sacs, et pourquoi.</div>
+          </div>
+        </div>
+        <span class="module-tag">À venir</span>
+      </div>
+
+    </div>
+
+    <p class="section-label reveal" style="margin-top:72px;">Sections<span class="section-qualifier">Ressources</span><span class="section-count" data-count-modules="2"></span></p>
+    <div class="modules reveal">
+      <div class="module pending">
+        <div class="module-left">
+          <span class="status-dot"></span>
+          <div>
+            <div class="module-name">Retex</div>
+            <div class="module-desc">Matériel testé sur la durée, retours d'usage.</div>
+          </div>
+        </div>
+        <span class="module-tag">À venir</span>
+      </div>
+
+      <a class="module active" href="terrain/index.html">
+        <div class="module-left">
+          <span class="status-dot"></span>
+          <div>
+            <div class="module-name">Terrain</div>
+            <div class="module-desc">S'orienter, progresser, tenir dehors — fiches pratiques.</div>
+          </div>
+        </div>
+        <span class="module-tag">Actif <span class="chev">›</span></span>
+      </a>
+
+      <!-- data-station : adresse interrogée au chargement pour établir
+           l'état réel de la station. Sans JavaScript, l'étiquette reste
+           « Intermittent », qui est vraie en toutes circonstances. -->
+      <a class="module intermittent" href="https://signal.rnrd.space"
+         target="_blank" rel="noopener" data-station="https://signal.rnrd.space">
+        <div class="module-left">
+          <span class="status-dot"></span>
+          <div>
+            <div class="module-name">Signal</div>
+            <div class="module-desc">Récepteur radio en écoute directe, allumé par intermittence.</div>
+          </div>
+        </div>
+        <span class="module-tag">Intermittent <span class="ext">↗</span></span>
+      </a>
+
+    </div>
+
+    <footer class="site-footer reveal">
+      <span class="footer-links">
+        <a href="projet.html">Le projet</a>
+        <a href="histoire.html">Histoire</a>
+      </span>
+      <span class="num">RNRD — <span data-year></span></span>
+    </footer>
+  </main>
+
+  <script src="assets/rnrd.js"></script>
+  <script>
+    /* --------------------------------------------------------------
+       Système solaire — propre à cette page.
+    
+       Mercure boucle en 5 s ; les autres suivent le rapport exact de
+       leurs périodes réelles rapportées aux 87,97 j de Mercure :
+       Vénus 224,7 j (×2,554), Terre 365,25 j (×4,151),
+       Mars 686,98 j (×7,807). Une année terrestre passe donc en une
+       vingtaine de secondes.
+    
+       Les positions sont recalculées image par image et écrites dans
+       les attributs cx/cy : aucune dépendance à SMIL, aux animations
+       CSS ni aux réglages d'effets visuels du système. L'animation
+       tourne toujours, sur tous les navigateurs.
+       -------------------------------------------------------------- */
+    (function () {
+      var BASE = 5;   // durée d'une orbite de Mercure, en secondes
+      var PLANETS = [
+        { id: 'p0', radius: 20, period: BASE * 1.000, phase: 0 },
+        { id: 'p1', radius: 32, period: BASE * 2.554, phase: 140 },
+        { id: 'p2', radius: 44, period: BASE * 4.151, phase: 250 },
+        { id: 'p3', radius: 56, period: BASE * 7.807, phase: 60 }
+      ];
+
+      var nodes = [];
+      for (var i = 0; i < PLANETS.length; i++) {
+        var el = document.getElementById(PLANETS[i].id);
+        if (el) { nodes.push({ el: el, cfg: PLANETS[i] }); }
+      }
+      if (!nodes.length) return;
+
+      function place(node, angleDeg) {
+        var rad = angleDeg * Math.PI / 180;
+        node.el.setAttribute('cx', (node.cfg.radius * Math.sin(rad)).toFixed(3));
+        node.el.setAttribute('cy', (-node.cfg.radius * Math.cos(rad)).toFixed(3));
+      }
+
+      for (var j = 0; j < nodes.length; j++) { place(nodes[j], nodes[j].cfg.phase); }
+
+      var start = null;
+      function frame(now) {
+        if (start === null) { start = now; }
+        var elapsed = (now - start) / 1000;
+        for (var k = 0; k < nodes.length; k++) {
+          var cfg = nodes[k].cfg;
+          place(nodes[k], cfg.phase + (elapsed / cfg.period) * 360);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      if (window.requestAnimationFrame) {
+        requestAnimationFrame(frame);
+      } else {
+        var t = 0;
+        setInterval(function () {
+          t += 0.05;
+          for (var k = 0; k < nodes.length; k++) {
+            var cfg = nodes[k].cfg;
+            place(nodes[k], cfg.phase + (t / cfg.period) * 360);
+          }
+        }, 50);
+      }
+    })();
+  </script>
+</body>
+
+</html>

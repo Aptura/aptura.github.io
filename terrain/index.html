@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0e0f0d">
+  <meta name="color-scheme" content="dark">
+
+  <title>Terrain — RNRD</title>
+  <meta name="description"
+    content="Fiches pratiques : lire une carte, transmettre une position en UTM ou MGRS, marcher à l'azimut, progresser discrètement, tenir dehors, alerter les secours.">
+  <link rel="canonical" href="https://rnrd.space/terrain/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Terrain — RNRD">
+  <meta property="og:description" content="S'orienter, progresser, tenir dehors. Fiches pratiques.">
+  <meta property="og:url" content="https://rnrd.space/terrain/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="RNRD">
+  <meta property="og:image" content="https://rnrd.space/assets/img/partage.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="RNRD — vivre avec peu, dehors autant que possible">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Terrain — RNRD",
+    "description": "Fiches pratiques : orientation, coordonnées UTM et MGRS, progression, vie dehors, alerte des secours.",
+    "url": "https://rnrd.space/terrain/",
+    "inLanguage": "fr-FR",
+    "author": { "@type": "Person", "name": "RNRD" },
+    "isPartOf": { "@type": "WebSite", "name": "RNRD", "url": "https://rnrd.space/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "RNRD", "item": "https://rnrd.space/" },
+      { "@type": "ListItem", "position": 2, "name": "Terrain", "item": "https://rnrd.space/terrain/" }
+    ]
+  }
+  </script>
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%236b6a61' stroke-width='1.2'/%3E%3Ccircle cx='16' cy='5' r='2.6' fill='%23c2884a'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23e8e6df'/%3E%3C/svg%3E">
+  <link rel="preload" href="../assets/fonts/inter-v20-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/manrope-v20-latin-200.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- La feuille commune porte toute la structure ; celle du mode
+       terrain ne fait que redéfinir les variables et ajouter les
+       quelques blocs propres à cette section. L'ordre compte. -->
+  <link rel="stylesheet" href="../assets/rnrd.css">
+  <link rel="stylesheet" href="../assets/rnrd-terrain.css">
+</head>
+
+<body class="centered" data-code="TERRAIN">
+
+  <main class="wrap">
+
+    <a class="crumb reveal" href="../index.html"><span class="chev">‹</span> RNRD</a>
+
+    <p class="eyebrow reveal">Terrain</p>
+    <h1 class="reveal">S'orienter,<br>progresser, tenir.</h1>
+    <p class="lede reveal">
+      Des fiches pratiques sur ce qui se joue une fois dehors : lire une
+      carte, tenir un cap sans électronique, se déplacer sans se faire
+      remarquer, durer une nuit de plus que prévu.
+    </p>
+
+    <div class="brief reveal">
+      <p class="brief-label">Avertissement</p>
+      <p>
+        Cette section est écrite pour la randonnée, le bivouac et la
+        marche d'orientation. Les techniques présentées viennent du
+        monde de la navigation terrestre et de la vie dehors : elles
+        servent à ne pas se perdre, à passer inaperçu d'un animal ou
+        d'un groupe, et à rentrer entier.
+      </p>
+      <p>
+        Rien de ce qui suit ne relève de l'entraînement au combat.
+        Le style est emprunté, pas le propos.
+      </p>
+    </div>
+
+    <p class="section-label reveal">Fiches<span class="section-count" data-count-fiches></span></p>
+
+    <!-- ════════════════════════════════════════════════════════════
+         AJOUTER UNE FICHE
+         Copier un bloc .fiche. Une fiche rédigée est un <a> ; une
+         fiche à venir est un <div class="fiche pending">.
+         Le code (TER-01…) suit l'ordre de rédaction, pas d'affichage.
+         ════════════════════════════════════════════════════════════ -->
+    <div class="fiches reveal">
+
+      <p class="fiches-group">S'orienter</p>
+
+      <a class="fiche" href="#ter-01">
+        <span class="fiche-code">TER-01</span>
+        <span>
+          <span class="fiche-name">Lire une carte au 1:25 000</span>
+          <span class="fiche-desc">Courbes de niveau, pentes, distances réelles, estimation du temps de marche.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+      <a class="fiche" href="#ter-02">
+        <span class="fiche-code">TER-02</span>
+        <span>
+          <span class="fiche-name">Coordonnées : UTM et MGRS</span>
+          <span class="fiche-desc">Lire sa position sur le quadrillage, la transmettre sans ambiguïté.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+      <a class="fiche" href="#ter-03">
+        <span class="fiche-code">TER-03</span>
+        <span>
+          <span class="fiche-name">Marcher à l'azimut</span>
+          <span class="fiche-desc">Tenir un cap à la boussole, sans repère visible et sans électronique.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+      <a class="fiche" href="#ter-04">
+        <span class="fiche-code">TER-04</span>
+        <span>
+          <span class="fiche-name">Se situer sans boussole</span>
+          <span class="fiche-desc">Soleil, ombre portée, étoiles — et les indices auxquels il ne faut pas se fier.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+
+      <p class="fiches-group">Progresser</p>
+
+      <a class="fiche" href="#ter-05">
+        <span class="fiche-code">TER-05</span>
+        <span>
+          <span class="fiche-name">S'habiller pour dehors, et pour passer inaperçu</span>
+          <span class="fiche-desc">Système de couches, matières à proscrire, discrétion du vêtement.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+      <a class="fiche" href="#ter-06">
+        <span class="fiche-code">TER-06</span>
+        <span>
+          <span class="fiche-name">Progresser discrètement</span>
+          <span class="fiche-desc">Silhouette, bruit, lignes de terrain, rythme. Passer sans être vu ni entendu.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+
+      <p class="fiches-group">Tenir</p>
+
+      <a class="fiche" href="#ter-07">
+        <span class="fiche-code">TER-07</span>
+        <span>
+          <span class="fiche-name">Eau : trouver, filtrer, traiter</span>
+          <span class="fiche-desc">Sources fiables, méthodes de traitement et ce que chacune ne fait pas.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+      <a class="fiche" href="#ter-08">
+        <span class="fiche-code">TER-08</span>
+        <span>
+          <span class="fiche-name">Choisir un emplacement de bivouac</span>
+          <span class="fiche-desc">Vent, eau, pente, dangers du dessus, discrétion, sortie possible de nuit.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+      <a class="fiche" href="#ter-09">
+        <span class="fiche-code">TER-09</span>
+        <span>
+          <span class="fiche-name">Froid : tenir une nuit imprévue</span>
+          <span class="fiche-desc">Isolation du sol, gestion de l'humidité, reconnaître une hypothermie.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+
+      <p class="fiches-group">Alerter</p>
+
+      <a class="fiche" href="#ter-10">
+        <span class="fiche-code">TER-10</span>
+        <span>
+          <span class="fiche-name">Se faire retrouver</span>
+          <span class="fiche-desc">Alerter les secours, transmettre une position, se signaler.</span>
+        </span>
+        <span class="fiche-state">Rédigée</span>
+      </a>
+
+    </div>
+
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════
+         FICHE RÉDIGÉE — modèle complet
+         Structure : titre, contexte, procédure numérotée,
+         avertissement, matériel. À dupliquer pour les suivantes.
+         ════════════════════════════════════════════════════════════ -->
+    <article class="body" id="ter-01">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-01</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Lire une carte au 1:25 000</h2>
+
+      <p>
+        Une carte au 1:25 000 réduit le terrain vingt-cinq mille fois :
+        un centimètre sur le papier vaut deux cent cinquante mètres
+        réels, et quatre centimètres valent un kilomètre. C'est l'échelle
+        de référence pour la marche, parce qu'elle montre le relief assez
+        finement pour anticiper une pente.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Lire le relief dans les courbes</p>
+            <p>Chaque courbe de niveau relie les points de même altitude.
+     L'écart d'altitude entre deux courbes voisines — l'équidistance —
+     est indiqué dans la légende : le plus souvent dix mètres sur les
+     cartes de randonnée françaises, parfois cinq en terrain plat.
+     Une courbe sur cinq est tracée plus épais et porte son altitude.</p>
+     <p>Des courbes serrées signalent une pente raide, des courbes
+     espacées une pente douce. Deux courbes qui se touchent indiquent
+     une barre rocheuse. La règle tient en une phrase : c'est
+     l'espacement qui renseigne, pas le nombre.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Distinguer une crête d'un talweg</p>
+            <p>Les courbes forment des V ou des U emboîtés. Lorsque la pointe
+     du V remonte vers l'amont, c'est un vallon — le talweg, où l'eau
+     s'écoule. Lorsqu'elle descend vers l'aval, c'est une croupe ou une
+     crête.</p>
+     <p>Le repère est fiable : les cours d'eau tracés en bleu suivent
+     toujours les V pointant vers le haut de la pente. En cas de doute,
+     chercher le ruisseau le plus proche et raisonner à partir de lui.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Mesurer une distance réelle</p>
+            <p>Mesurer la distance sur la carte avec la règle de la boussole,
+     puis multiplier par 250 pour obtenir des mètres. Un itinéraire de
+     douze centimètres représente trois kilomètres à plat.</p>
+     <p>À plat seulement : en montagne, la distance parcourue est
+     supérieure à la distance mesurée, puisque la carte est une
+     projection vue du dessus. L'écart reste modeste jusqu'à trente
+     pour cent de pente, il devient sensible au-delà.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Calculer une pente</p>
+            <p>Diviser le dénivelé par la distance horizontale, puis multiplier
+     par cent. Cent mètres de dénivelé sur cinq cents mètres de
+     distance donnent vingt pour cent.</p>
+     <p>Repères utiles : au-delà de trente pour cent la marche devient
+     pénible et la descente délicate, au-delà de quarante-cinq pour cent
+     le terrain relève de l'alpinisme plutôt que de la randonnée. En
+     hiver, une pente comprise entre trente et quarante-cinq degrés est
+     celle où les avalanches partent le plus souvent.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Estimer le temps de marche</p>
+            <p>Une base répandue : quatre kilomètres par heure en terrain facile,
+     plus une heure par tranche de trois cents à quatre cents mètres de
+     dénivelé positif. Pour un itinéraire de huit kilomètres avec six
+     cents mètres de montée, cela donne environ quatre heures.</p>
+     <p>Cette estimation ne vaut que calibrée sur soi-même. Elle ignore
+     les pauses, le poids porté, l'état du terrain et la fatigue de fin
+     de journée. La mesurer sur deux ou trois sorties connues vaut mieux
+     que n'importe quelle formule.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Plier la carte pour ce qu'on parcourt</p>
+            <p>Une carte pliée sur la zone du jour, dans une pochette étanche,
+     se consulte d'une main et sous la pluie. Une carte dépliée en plein
+     vent se déchire et signale de loin qu'on cherche son chemin.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          Une carte vieillit : les sentiers se ferment, les passerelles
+          disparaissent, les forêts sont coupées. Vérifier l'année
+          d'édition, et considérer le relief comme fiable, les
+          aménagements comme indicatifs. Le tracé d'un sentier sur la
+          carte ne garantit ni son existence, ni sa praticabilité.
+        </p>
+      </div>
+
+      <div class="specs">
+        <p class="specs-title">Nécessaire</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>Carte</dt><dd>1:25 000, zone du parcours</dd></div>
+          <div class="spec-row"><dt>Protection</dt><dd>Pochette étanche</dd></div>
+          <div class="spec-row"><dt>Mesure</dt><dd>Règle de la boussole</dd></div>
+          <div class="spec-row"><dt>Traçage</dt><dd>Crayon gras, effaçable</dd></div>
+        </dl>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-02">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-02</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Coordonnées : UTM et MGRS</h2>
+
+      <p>
+        Une position se dit de plusieurs façons, et toutes ne se valent
+        pas selon l'usage. Deux formats couvrent l'essentiel de ce qu'on
+        fait dehors : l'UTM pour lire sa position sur une carte papier,
+        le MGRS pour la transmettre. Les deux reposent sur le même
+        découpage, ce qui permet de passer de l'un à l'autre sans calcul.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Ce que fait l'UTM</p>
+            <p>
+              Le système découpe la Terre en soixante fuseaux de six
+              degrés de longitude, numérotés d'ouest en est. Dans chaque
+              fuseau, une position s'exprime par deux distances en
+              mètres : l'une vers l'est, l'autre depuis l'équateur.
+            </p>
+            <p>
+              La conséquence est ce qui fait tout l'intérêt du format :
+              les coordonnées sont métriques. Deux points distants de
+              mille en abscisse sont à mille mètres l'un de l'autre. Il
+              n'y a rien à convertir, rien à diviser par soixante — ce
+              que ne permet aucun format en degrés.
+            </p>
+            <p>
+              La France métropolitaine s'étale sur trois fuseaux : le 30
+              à l'ouest, le 31 au centre, le 32 pour l'est et le
+              sud-est.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Ce qu'ajoute le MGRS</p>
+            <p>
+              Le MGRS reprend exactement le même découpage et le rend
+              transmissible. Il ajoute une bande de latitude au numéro
+              de fuseau, puis désigne un carré de cent kilomètres par
+              deux lettres, et n'exprime plus la position qu'à
+              l'intérieur de ce carré.
+            </p>
+            <p>
+              Une référence complète ressemble à
+              <span class="mono">32T LP 12345 67890</span>. La précision
+              se règle par le nombre de chiffres : quatre chiffres
+              désignent un carré d'un kilomètre, six un carré de cent
+              mètres, huit un carré de dix mètres, dix un carré d'un
+              mètre. On donne la précision utile, pas davantage.
+            </p>
+            <p>
+              C'est le format normalisé de l'OTAN, employé par les
+              armées et par une partie des services de protection
+              civile.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Pourquoi ces deux-là plutôt que les degrés</p>
+            <p>
+              <b>Ils se lisent directement sur la carte.</b> Les cartes
+              IGN au 1:25 000 dites « compatibles GPS » portent un
+              quadrillage kilométrique UTM imprimé en bleu. La position
+              affichée par un récepteur se reporte donc sur le papier
+              sans conversion, et inversement.
+            </p>
+            <p>
+              <b>Ils se transmettent sans ambiguïté.</b> Une suite de
+              chiffres ne souffre pas des confusions classiques des
+              degrés : minutes prises pour des décimales, secondes
+              oubliées, signe ou hémisphère perdu. À la voix ou en radio
+              dégradée, c'est un avantage réel.
+            </p>
+            <p>
+              <b>Ils sont courts.</b> Une référence MGRS à six chiffres
+              tient en une dizaine de caractères pour une précision de
+              cent mètres — suffisant pour être retrouvé, assez bref
+              pour être répété deux fois sans se tromper.
+            </p>
+            <p>
+              <b>Ils raisonnent en distances.</b> Estimer un
+              déplacement, vérifier une progression ou décrire un
+              décalage devient de l'arithmétique simple.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Lire sa position sur la carte</p>
+            <p>
+              Sur une carte quadrillée UTM, repérer d'abord le carré
+              kilométrique où l'on se trouve : on lit la valeur de sa
+              ligne verticale gauche, puis celle de sa ligne horizontale
+              basse. Les abscisses avant les ordonnées, toujours.
+            </p>
+            <p>
+              Pour affiner, estimer la position à l'intérieur du carré
+              en dixièmes : un carré fait un kilomètre de côté, donc un
+              dixième vaut cent mètres. Une règle graduée ou le bord de
+              la boussole rend l'estimation plus sûre qu'à l'œil.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Régler ses appareils une fois pour toutes</p>
+            <p>
+              Le format ne sert que si le récepteur et la carte parlent
+              le même langage. Vérifier deux réglages : le système
+              géodésique doit être en WGS84, et le format d'affichage en
+              UTM ou MGRS selon l'usage. Un mauvais système géodésique
+              décale la position de plusieurs dizaines à plusieurs
+              centaines de mètres, sans qu'aucun message d'erreur ne le
+              signale.
+            </p>
+            <p>
+              Le faire à la maison, pas sur le terrain. Et l'écrire
+              quelque part : c'est le genre de réglage qu'on perd à la
+              première réinitialisation.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Annoncer le format avant les chiffres</p>
+            <p>
+              C'est la règle qui évite le plus d'erreurs. Une suite de
+              chiffres sans son format est inexploitable, et pire :
+              interprétable dans le mauvais système. Dire d'abord
+              « coordonnées MGRS », ou « UTM fuseau 32 », puis les
+              valeurs, puis les répéter.
+            </p>
+            <p>
+              Épeler les lettres en alphabet radio, et découper les
+              chiffres deux par deux. Faire répéter par le
+              correspondant : une position transmise sans accusé de
+              réception n'est pas une position transmise.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Ce qu'il faut savoir avant d'appeler les secours</p>
+        <p>
+          Les secours français n'attendent pas du MGRS. La procédure
+          diffusée par les unités de secours en montagne demande une
+          description — massif, sommet, versant, altitude, itinéraire —
+          et des coordonnées, le plus souvent en degrés décimaux, format
+          que donne un téléphone par défaut. Les équipes savent convertir
+          d'un système à l'autre, mais l'opérateur qui décroche n'est pas
+          forcément celui qui connaît le MGRS.
+        </p>
+        <p>
+          En pratique : appeler le 112, annoncer le format employé et
+          rester prêt à donner l'équivalent en degrés décimaux. Surtout,
+          répondre au message que les secours envoient : il déclenche
+          une géolocalisation du téléphone qui reste, en France, la
+          méthode la plus rapide et la plus fiable. Le MGRS est un
+          excellent outil de travail et de transmission entre gens
+          équipés ; ce n'est pas le format d'un appel d'urgence civil.
+        </p>
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Autres limites</p>
+        <p>
+          À proximité d'une limite de fuseau, deux positions voisines
+          peuvent se référer à des fuseaux différents : toujours
+          transmettre le numéro. Le quadrillage UTM n'est imprimé que
+          sur les cartes récentes dites compatibles GPS — les plus
+          anciennes portent d'autres systèmes. Enfin, depuis 2014 les
+          cartes IGN au 1:25 000 ne sont plus alignées sur le nord
+          géographique mais sur la grille Lambert 93, ce qui décale
+          légèrement le quadrillage UTM par rapport aux bords de la
+          feuille : le constater une fois évite de s'interroger sur le
+          terrain.
+        </p>
+      </div>
+
+      <div class="specs">
+        <p class="specs-title">Précision selon le nombre de chiffres</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>4 chiffres</dt><dd>Carré de 1 km</dd></div>
+          <div class="spec-row"><dt>6 chiffres</dt><dd>Carré de 100 m</dd></div>
+          <div class="spec-row"><dt>8 chiffres</dt><dd>Carré de 10 m</dd></div>
+          <div class="spec-row"><dt>10 chiffres</dt><dd>Carré de 1 m</dd></div>
+        </dl>
+
+        <p class="specs-title">Réglages à vérifier</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>Système géodésique</dt><dd>WGS84</dd></div>
+          <div class="spec-row"><dt>Format d'affichage</dt><dd>UTM ou MGRS</dd></div>
+          <div class="spec-row"><dt>Fuseau, France</dt><dd>30, 31 ou 32 selon la région</dd></div>
+          <div class="spec-row"><dt>Repli</dt><dd>Degrés décimaux, pour les secours</dd></div>
+        </dl>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-03">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-03</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Marcher à l'azimut</h2>
+
+      <p>
+        Tenir un cap précis quand le terrain ne donne aucun repère :
+        brouillard, forêt dense, plateau uniforme, nuit. La boussole ne
+        dit pas où l'on est — elle dit dans quelle direction avancer.
+        C'est suffisant pour rejoindre un point connu sans dériver.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Relever l'azimut sur la carte</p>
+            <p>
+              Poser le bord de la boussole entre la position actuelle et
+              l'objectif, la flèche de direction pointant vers
+              l'objectif. Tourner le cadran jusqu'à ce que ses lignes de
+              nord soient parallèles aux méridiens de la carte, le nord
+              du cadran vers le haut de la carte. Lire la valeur en face
+              de l'index : c'est l'azimut, en degrés.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Corriger la déclinaison</p>
+            <p>
+              Le nord magnétique ne coïncide pas avec le nord
+              géographique de la carte. L'écart, appelé déclinaison,
+              figure dans la légende avec sa date et sa dérive annuelle.
+              En France métropolitaine il reste faible, mais sur
+              plusieurs kilomètres l'erreur devient sensible : un degré
+              d'écart déporte d'environ dix-sept mètres par kilomètre
+              parcouru.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Orienter la boussole sur soi</p>
+            <p>
+              Tenir la boussole à plat devant soi, à hauteur de poitrine,
+              la flèche de direction pointant vers l'avant. Pivoter avec
+              tout le corps jusqu'à ce que l'aiguille aimantée se loge
+              dans le repère du cadran. La flèche de direction indique
+              alors le cap à suivre.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Viser un point, pas l'horizon</p>
+            <p>
+              Marcher les yeux sur la boussole conduit à zigzaguer.
+              Repérer plutôt un objet fixe dans l'axe — un arbre isolé,
+              un rocher, une trouée — s'y rendre sans regarder
+              l'instrument, puis recommencer. Chaque visée corrige la
+              précédente.
+            </p>
+            <p>
+              De nuit ou par mauvaise visibilité, envoyer un
+              accompagnant en avant et le guider à la voix jusqu'à ce
+              qu'il soit dans l'axe : il devient le point de visée.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Compter ses pas</p>
+            <p>
+              Connaître son nombre de doubles-pas pour cent mètres —
+              généralement entre soixante et soixante-dix en terrain
+              plat — permet d'estimer la distance parcourue. Marquer
+              chaque centaine de mètres, par exemple en déplaçant un
+              caillou d'une poche à l'autre. En montée, en descente ou
+              en sous-bois, le compte s'allonge : le calibrer sur le
+              terrain réel, pas sur une route.
+            </p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Contourner un obstacle sans perdre le cap</p>
+            <p>
+              Devant un obstacle infranchissable, tourner de 90 degrés,
+              compter les pas parcourus, reprendre l'azimut initial le
+              temps de dépasser l'obstacle, puis tourner de 90 degrés
+              dans l'autre sens et parcourir le même nombre de pas. Le
+              cap d'origine est retrouvé, décalé de rien.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          Une boussole se dérègle à proximité du métal et de
+          l'électronique : la tenir à distance du téléphone, du couteau
+          et des boucles de sac. Vérifier régulièrement que l'aiguille
+          revient bien au nord une fois la boussole immobile. Et garder
+          en tête qu'un azimut ne remplace pas une position : en cas de
+          doute sur l'endroit où l'on se trouve, s'arrêter et se
+          resituer plutôt que continuer.
+        </p>
+      </div>
+
+      <div class="specs">
+        <p class="specs-title">Nécessaire</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>Boussole</dt><dd>À plaquette transparente</dd></div>
+          <div class="spec-row"><dt>Carte</dt><dd>1:25 000, dans une pochette étanche</dd></div>
+          <div class="spec-row"><dt>Repère de comptage</dt><dd>Cordelette à nœuds ou cailloux</dd></div>
+          <div class="spec-row"><dt>Éclairage</dt><dd>Frontale, mode rouge</dd></div>
+        </dl>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-04">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-04</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Se situer sans boussole</h2>
+
+      <p>
+        Aucune de ces méthodes n'égale une boussole. Elles servent quand
+        l'instrument manque ou qu'on le soupçonne faussé, et elles
+        donnent une direction générale — pas un azimut. Toutes valent
+        pour l'hémisphère nord.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Le soleil, avec ses limites</p>
+            <p>Le soleil se lève à l'est et se couche à l'ouest deux jours par
+     an seulement, aux équinoxes. Le reste de l'année il dérive vers le
+     nord-est en été, vers le sud-est en hiver — l'écart atteint
+     facilement quarante degrés sous nos latitudes.</p>
+     <p>Un repère plus fiable : à midi solaire, le soleil est plein sud
+     et les ombres pointent plein nord. Attention, midi solaire ne
+     correspond pas à midi à la montre — en France, avec le décalage
+     horaire, il tombe vers treize heures trente en hiver et quatorze
+     heures trente en été.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">La méthode de l'ombre portée</p>
+            <p>Planter un bâton bien vertical sur un sol plat et dégagé.
+     Marquer l'extrémité de son ombre avec un caillou. Attendre quinze
+     à vingt minutes, puis marquer la nouvelle extrémité.</p>
+     <p>La ligne qui joint les deux marques est orientée
+     approximativement d'ouest en est, la première marque étant à
+     l'ouest. Se placer perpendiculairement, le premier caillou à
+     gauche : on regarde alors vers le nord. La précision est
+     médiocre mais suffit à éviter une erreur d'un quart de tour.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">L'étoile Polaire</p>
+            <p>De nuit, c'est la méthode la plus sûre : la Polaire indique le
+     nord géographique à environ un degré près, et ne bouge pas de la
+     nuit.</p>
+     <p>La trouver par la Grande Ourse : prolonger cinq fois la
+     distance entre les deux étoiles qui ferment le côté du
+     « chariot », à l'opposé du manche. On tombe sur une étoile
+     moyennement brillante et isolée. Quand la Grande Ourse est basse
+     ou masquée, Cassiopée — le W — se trouve de l'autre côté de la
+     Polaire et permet de la retrouver.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Ce à quoi il ne faut pas se fier</p>
+            <p>La mousse ne pousse pas systématiquement au nord : elle pousse
+     là où il y a de l'humidité et peu de soleil, ce qui dépend du
+     couvert, de la pente et du vent bien plus que de l'orientation.
+     S'y fier a envoyé beaucoup de monde dans la mauvaise direction.</p>
+     <p>Même méfiance envers l'asymétrie des branches, l'orientation
+     des fourmilières ou l'épaisseur des cernes : ce sont des
+     tendances statistiques, pas des indicateurs utilisables sur un
+     arbre isolé.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se resituer par le terrain</p>
+            <p>Plutôt que chercher le nord, chercher une ligne connue : un
+     cours d'eau, une ligne de crête, une route, une ligne
+     électrique. Marcher perpendiculairement jusqu'à la rencontrer
+     donne une position sûre, même sans savoir où l'on est.</p>
+     <p>Un cours d'eau descend toujours vers l'aval et finit par
+     croiser une habitation ou une route. C'est plus long qu'un cap
+     direct, mais on ne s'y perd pas.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          Ces méthodes donnent une direction, jamais une position. Si
+          l'on ignore où l'on se trouve, connaître le nord ne suffit
+          pas à rentrer. La règle qui sauve reste la même : s'arrêter
+          dès le doute, plutôt que de continuer en espérant reconnaître
+          quelque chose. Marcher perdu aggrave toujours la situation.
+        </p>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-05">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-05</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">S'habiller pour dehors, et pour passer inaperçu</h2>
+
+      <p>
+        Deux exigences qui semblent contradictoires : un vêtement doit
+        d'abord fonctionner — réguler la température et l'humidité — et
+        ensuite ne pas attirer l'attention. Elles se concilient mieux
+        qu'on ne croit, à condition de renoncer au style militaire
+        affiché.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Penser en couches, pas en vêtements</p>
+            <p>Trois fonctions distinctes. La première couche évacue la
+     transpiration et reste au contact de la peau. La deuxième isole en
+     emprisonnant de l'air. La troisième arrête le vent et la pluie.</p>
+     <p>L'intérêt du système est de pouvoir en retirer une avant de
+     transpirer, et d'en remettre une dès l'arrêt. Le bon réflexe est
+     d'ouvrir ou d'enlever une couche juste avant l'effort, pas
+     lorsqu'on a déjà chaud.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Proscrire le coton en conditions humides</p>
+            <p>Le coton absorbe jusqu'à plusieurs fois son poids en eau, perd
+     alors tout pouvoir isolant, et sèche très lentement en refroidissant
+     le corps par évaporation. C'est le facteur aggravant le plus fréquent
+     dans les hypothermies de randonnée.</p>
+     <p>Laine mérinos ou synthétique pour la première couche : les deux
+     isolent encore une fois mouillées, la laine en prime ne prend pas
+     l'odeur.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Gérer l'humidité plutôt que la combattre</p>
+            <p>La sueur mouille de l'intérieur ce que la veste protège de
+     l'extérieur. Marcher légèrement en dessous de sa température de
+     confort, ouvrir les aérations avant de suer, ralentir en montée
+     plutôt que forcer.</p>
+     <p>Garder une couche sèche jamais portée en marchant, réservée aux
+     arrêts et à la nuit. C'est elle qui fait la différence quand le
+     temps tourne.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Choisir des couleurs qui ne signalent pas</p>
+            <p>Les teintes sourdes — gris, olive, brun, bleu délavé, kaki —
+     s'intègrent au paysage et ne marquent pas dans un village. Éviter
+     les couleurs vives, les blancs, les logos réfléchissants et les
+     grandes marques identifiables.</p>
+     <p>Une exception à assumer : en battue de chasse ou en secours, on
+     veut au contraire être vu. Garder un élément fluorescent pliable
+     dans le sac plutôt que le porter en permanence.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Éviter, en ville, ce qui a l'air militaire</p>
+            <p>C'est le point que beaucoup manquent : un motif camouflage, un
+     gilet tactique, des poches molle et des bottes de combat font
+     exactement l'inverse de passer inaperçu en milieu habité. Ils
+     désignent, intriguent, et parfois inquiètent.</p>
+     <p>La discrétion en ville consiste à ressembler à ce qui est
+     ordinaire : vêtement de randonnée sobre, sac de ville neutre, rien
+     qui dépasse ni ne pende. L'efficacité technique se choisit sur la
+     coupe et la matière, pas sur l'apparence.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Soigner les extrémités et les pieds</p>
+            <p>La tête, les mains et les pieds concentrent l'inconfort et les
+     blessures. Un bonnet fin change une nuit entière ; des chaussettes
+     de rechange sèches valent leur poids ; des chaussures rodées avant
+     la sortie évitent les ampoules, qui restent la première cause
+     d'abandon en randonnée.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          Le matériel ne remplace jamais la marge de sécurité. Une bonne
+          veste permet de continuer alors qu'il aurait fallu s'arrêter,
+          et c'est précisément ainsi qu'on se met en difficulté. Le
+          vêtement sert à supporter les conditions prévues, pas à
+          justifier de partir dans des conditions qu'on n'a pas prévues.
+        </p>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-06">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-06</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Progresser discrètement</h2>
+
+      <p>
+        Se déplacer sans être remarqué sert d'abord à observer la faune,
+        ensuite à ne pas déranger, enfin à ne pas attirer l'attention là
+        où mieux vaut passer inaperçu. Ce qui trahit une présence tient
+        en quatre points : la silhouette, le mouvement, le bruit et
+        l'odeur.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Ne jamais se découper sur le ciel</p>
+            <p>Une silhouette sur une ligne de crête se voit à des kilomètres,
+     de jour comme au clair de lune. Franchir une crête en passant par
+     un col, un bosquet ou une échancrure, et si c'est impossible, la
+     franchir courbé et rapidement.</p>
+     <p>Le même principe vaut pour les lisières et les ouvertures :
+     rester dans la masse sombre plutôt que devant elle.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Suivre les lignes du terrain</p>
+            <p>Les plis du terrain — talwegs, fossés, haies, lisières — offrent
+     un cheminement qui masque à la vue sans coûter d'effort
+     supplémentaire. C'est presque toujours plus discret que le sentier,
+     et souvent aussi rapide.</p>
+     <p>À défaut, marcher du côté ombré et éviter les surfaces claires
+     qui renvoient la lumière : dalles, sable, névés.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Rythmer plutôt qu'avancer</p>
+            <p>C'est le mouvement continu qui attire l'œil, humain comme
+     animal. Avancer par segments courts, s'arrêter, observer, écouter,
+     repartir. Les arrêts doivent durer assez pour que le terrain
+     reprenne son bruit de fond — une minute suffit souvent.</p>
+     <p>Pendant l'arrêt, se placer contre un tronc ou un rocher plutôt
+     qu'à découvert : une forme immobile intégrée à une masse ne se
+     distingue pas.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Poser le pied plutôt que le laisser tomber</p>
+            <p>Poser d'abord le bord externe du pied, dérouler lentement vers
+     l'intérieur, puis transférer le poids. Sur feuilles sèches ou
+     branchages, choisir où poser plutôt que ralentir : un pas bien
+     placé est plus silencieux qu'un pas lent mal placé.</p>
+     <p>Le sol mou, la mousse, la terre humide et l'herbe amortissent.
+     Le gravier, les feuilles mortes et les branches sèches trahissent.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Faire taire son équipement</p>
+            <p>Le matériel fait souvent plus de bruit que le marcheur : boucles
+     qui cliquettent, sangles qui battent, objets qui roulent dans le
+     sac, tissus synthétiques qui froissent à chaque pas.</p>
+     <p>Sangler court, scotcher ou nouer les extrémités libres, caler le
+     contenu du sac pour qu'il ne bouge pas, et faire quelques pas en
+     écoutant avant de partir. Éteindre les notifications et couvrir
+     tout écran.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Compter avec le vent et la lumière</p>
+            <p>Pour l'observation animale, le vent prime sur tout le reste :
+     approcher face au vent, sans quoi l'odeur précède de très loin.
+     Vérifier sa direction régulièrement, elle tourne avec le relief et
+     l'heure.</p>
+     <p>De nuit, une frontale en mode rouge éclaire assez pour marcher
+     tout en préservant la vision nocturne, et se voit beaucoup moins
+     loin qu'un faisceau blanc.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Cadre et bon sens</p>
+        <p>
+          Ces techniques viennent de la marche d'approche naturaliste et
+          de la course d'orientation. Discrétion ne veut pas dire
+          clandestinité : les terrains privés, les réserves et les
+          zones réglementées le restent, et la faune sauvage n'a pas à
+          être approchée en période de reproduction ou de mise bas. La
+          discrétion sert à déranger moins, pas à s'affranchir de ce qui
+          s'applique à tout le monde.
+        </p>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-07">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-07</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Eau : trouver, filtrer, traiter</h2>
+
+      <p>
+        Aucune eau naturelle n'est sûre par principe, y compris une eau
+        limpide, froide et courante en altitude. Les agents pathogènes
+        qui posent problème — bactéries, virus, protozoaires — ne se
+        voient pas et ne se goûtent pas.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Choisir la source</p>
+            <p>Préférer une eau courante à une eau stagnante, une source à un
+     ruisseau, l'amont à l'aval. Remonter au-dessus des pâturages, des
+     habitations, des chemins et des zones de baignade. Une eau qui
+     sort de terre est en général meilleure qu'une eau qui a coulé à
+     l'air libre.</p>
+     <p>Se méfier de ce qui pousse autour : algues abondantes, film
+     irisé, absence totale de vie, odeur. Et proscrire toute eau proche
+     d'une activité industrielle ou agricole — aucun traitement portable
+     ne retire les produits chimiques ni les métaux.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Clarifier avant de traiter</p>
+            <p>Une eau trouble met en échec la plupart des traitements : les
+     particules abritent les micro-organismes et bloquent les
+     ultraviolets. Laisser décanter, puis filtrer à travers un tissu
+     serré ou un préfiltre avant tout autre traitement.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Faire bouillir, la méthode la plus sûre</p>
+            <p>Porter l'eau à gros bouillons pendant une minute. Au-dessus de
+     deux mille mètres d'altitude, prolonger à trois minutes, la
+     température d'ébullition étant plus basse. Certaines agences
+     recommandent d'appliquer cette règle dès mille mètres, par
+     précaution.</p>
+     <p>L'ébullition élimine bactéries, virus et parasites, y compris
+     ceux qui résistent aux produits chimiques. En revanche elle ne
+     retire ni les métaux lourds, ni les pesticides, ni le sel.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Filtrer : ce que ça fait, ce que ça ne fait pas</p>
+            <p>Un filtre portable annoncé à 0,2 micron retient les protozoaires
+     et la plupart des bactéries. Il ne retient pas les virus, qui sont
+     bien plus petits.</p>
+     <p>En montagne européenne peu fréquentée, le risque viral reste
+     faible et le filtre suffit généralement. En zone habitée, en aval
+     d'activité humaine ou à l'étranger, il faut y ajouter un traitement
+     chimique ou l'ébullition.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Traiter chimiquement, avec le bon temps de contact</p>
+            <p>Les pastilles ou gouttes agissent lentement et leur efficacité
+     dépend de la température, de la turbidité et du micro-organisme
+     visé. Les temps de contact vont de trente minutes à quatre heures
+     selon les produits et les cibles.</p>
+     <p>Point important : les traitements à base de chlore ou d'iode
+     sont peu efficaces contre certains protozoaires très résistants.
+     Suivre la notice à la lettre, et ne pas raccourcir l'attente parce
+     qu'on a soif.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Boire avant d'avoir soif</p>
+            <p>La soif apparaît alors que la déshydratation est déjà installée.
+     Boire régulièrement de petites quantités plutôt qu'un litre d'un
+     coup, et surveiller la couleur des urines : claires, tout va bien ;
+     foncées, il faut boire davantage.</p>
+     <p>Par forte chaleur ou effort prolongé, l'eau seule ne suffit pas :
+     il faut aussi du sel et des glucides, sans quoi l'eau bue est
+     éliminée sans être retenue.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          En cas de doute sur une eau et sans aucun moyen de traitement,
+          la décision dépend du contexte : une déshydratation sévère tue
+          plus vite qu'une gastro-entérite, mais boire une eau
+          manifestement polluée peut aggraver la situation. La bonne
+          réponse est de ne jamais se retrouver dans ce choix : partir
+          avec une réserve, un moyen de traitement, et repérer les
+          points d'eau sur la carte avant de partir.
+        </p>
+      </div>
+
+      <div class="specs">
+        <p class="specs-title">Nécessaire</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>Filtre</dt><dd>0,2 micron ou moins</dd></div>
+          <div class="spec-row"><dt>Appoint chimique</dt><dd>Pastilles, en secours du filtre</dd></div>
+          <div class="spec-row"><dt>Préfiltre</dt><dd>Tissu serré ou filtre à café</dd></div>
+          <div class="spec-row"><dt>Contenance</dt><dd>Deux litres minimum</dd></div>
+        </dl>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-08">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-08</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Choisir un emplacement de bivouac</h2>
+
+      <p>
+        Un bon emplacement se choisit une heure avant la nuit, pas à la
+        frontale. Les critères se hiérarchisent : d'abord ce qui peut
+        blesser, ensuite ce qui empêche de dormir, enfin le confort.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Regarder ce qu'il y a au-dessus</p>
+            <p>C'est le premier réflexe, et le plus souvent oublié. Branches
+     mortes en suspension, arbres penchés ou fendus, blocs instables en
+     amont, corniches de neige : tout ce qui peut tomber tombe un jour,
+     et de préférence par vent nocturne.</p>
+     <p>S'écarter d'au moins une hauteur d'arbre d'un sujet mort ou
+     abîmé.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Éviter les lits d'écoulement</p>
+            <p>Un lit de rivière à sec, un ravin, une combe étroite : autant de
+     endroits confortables et plats qui deviennent des couloirs d'eau en
+     quelques minutes lors d'un orage, y compris si la pluie tombe à
+     plusieurs kilomètres en amont. Le sud-est de la France en donne
+     l'exemple chaque automne.</p>
+     <p>Camper au-dessus du niveau visible de crue, jamais dedans.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se placer à mi-pente, pas au fond</p>
+            <p>L'air froid s'écoule et s'accumule au point bas : un fond de
+     vallon peut être plusieurs degrés plus froid qu'un replat situé
+     vingt mètres au-dessus, et s'y couvre de rosée ou de givre.</p>
+     <p>Une légère surélévation, à l'abri du vent dominant mais pas dans
+     un creux, offre le meilleur compromis. Un sol légèrement bombé
+     évacue l'eau ; une cuvette la retient.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se tenir à distance de l'eau</p>
+            <p>Assez près pour aller en chercher, assez loin pour ne pas
+     subir l'humidité, les moustiques, le bruit continu qui masque tout
+     le reste, et le passage des animaux qui viennent boire. Une
+     cinquantaine de mètres est un bon compromis.</p>
+     <p>Dans plusieurs pays, une distance minimale aux points d'eau est
+     d'ailleurs imposée pour protéger la ressource.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Vérifier la discrétion et la sortie</p>
+            <p>Un emplacement invisible depuis les sentiers et les habitations
+     évite les rencontres inutiles. Arriver tard, partir tôt, ne rien
+     laisser : c'est la définition même du bivouac, par opposition au
+     camping.</p>
+     <p>Avant de s'installer, repérer par où l'on partirait de nuit en
+     cas de nécessité, et vérifier que l'itinéraire reste praticable
+     sans visibilité.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se renseigner sur ce qui est permis</p>
+            <p>Les règles varient d'un pays, d'un massif et d'une commune à
+     l'autre. En France, le bivouac — une nuit, du coucher au lever du
+     soleil, sans installation — est toléré dans beaucoup d'endroits
+     mais interdit dans certains cœurs de parcs nationaux, réserves,
+     zones de captage et forêts domaniales.</p>
+     <p>Se renseigner avant, pas sur place : l'ignorance ne dispense de
+     rien, et une réserve naturelle n'est pas signalée à chaque pas.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Ne rien laisser</p>
+        <p>
+          Emporter tous ses déchets, y compris organiques et papier
+          hygiénique. Enterrer les excréments à au moins vingt
+          centimètres de profondeur et à bonne distance de tout point
+          d'eau. Ne pas creuser de rigole, ne pas couper de branches
+          vertes, ne pas faire de feu hors des emplacements autorisés —
+          en période sèche, c'est souvent purement interdit. Un
+          emplacement bien choisi ne se voit plus une heure après le
+          départ.
+        </p>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-09">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-09</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Froid : tenir une nuit imprévue</h2>
+
+      <p>
+        Rester dehors une nuit non prévue arrive : une entorse, un
+        brouillard, un itinéraire plus long qu'estimé. Ce n'est pas grave
+        en soi, à condition de s'y prendre tôt et de comprendre par où le
+        corps perd sa chaleur.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">S'arrêter tant qu'il fait encore jour</p>
+            <p>La décision de s'installer doit être prise une bonne heure avant
+     la nuit, pendant qu'on voit encore, qu'on a encore de l'énergie et
+     que les doigts fonctionnent. Continuer « encore un peu » pour
+     gagner du terrain est ce qui transforme une nuit inconfortable en
+     situation sérieuse.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se couper du sol avant tout le reste</p>
+            <p>Le sol absorbe la chaleur bien plus vite que l'air : c'est par
+     conduction que l'on se refroidit le plus, allongé. Toute épaisseur
+     est bonne — sac à dos vidé sous le buste, corde, feuilles mortes,
+     branches de résineux, mousse, carton.</p>
+     <p>Vingt centimètres de végétation sèche tassée valent mieux qu'une
+     couverture posée à même la terre. Isoler d'abord le tronc et les
+     hanches, ensuite les jambes.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se mettre à l'abri du vent et de la pluie</p>
+            <p>Le vent multiplie la perte de chaleur ; l'humidité l'accélère
+     encore. Chercher un abri naturel — pied de rocher, souche, dépression
+     abritée, lisière dense — plutôt que construire, ce qui coûte de
+     l'énergie et de la sueur.</p>
+     <p>Une couverture de survie, côté doré vers soi, coupe le vent et
+     renvoie une partie du rayonnement. Elle ne remplace pas l'isolation
+     du sol.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Rester sec, quitte à avoir un peu froid</p>
+            <p>Retirer immédiatement tout vêtement mouillé et enfiler la couche
+     sèche gardée en réserve. Ne pas se réchauffer par un effort
+     violent : la sueur produite mouille de l'intérieur et le froid
+     revient plus fort une fois l'effort arrêté.</p>
+     <p>Mieux vaut avoir légèrement froid et rester sec que l'inverse.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Manger et boire</p>
+            <p>Le corps produit sa chaleur à partir de ce qu'il digère : un
+     estomac vide grelotte sans résultat. Prendre des glucides, boire
+     tiède si possible, éviter l'alcool qui dilate les vaisseaux
+     périphériques et accélère la perte de chaleur en donnant une
+     sensation trompeuse de réchauffement.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Reconnaître une hypothermie</p>
+            <p>Les premiers signes sont les frissons, les gestes maladroits, la
+     parole hésitante, la difficulté à réfléchir et un comportement
+     inhabituel. La personne concernée est souvent la dernière à s'en
+     rendre compte : c'est au groupe de surveiller.</p>
+     <p>Signal d'alarme : lorsque les frissons cessent alors qu'il fait
+     toujours froid, l'état s'aggrave au lieu de s'améliorer. À ce
+     stade, manipuler la personne avec douceur, l'isoler du sol,
+     l'envelopper, ne rien lui faire boire si elle n'est pas parfaitement
+     consciente, ne pas frictionner les membres, et alerter les secours.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          Ces gestes valent pour une nuit imprévue en conditions
+          tempérées. Une hypothermie installée relève du secours
+          médical, pas du réchauffement improvisé : en Europe, le 112
+          fonctionne depuis n'importe quel téléphone, y compris sans
+          carte SIM et sur le réseau d'un autre opérateur. Appeler tôt
+          coûte moins cher qu'appeler tard.
+        </p>
+      </div>
+
+      <div class="specs">
+        <p class="specs-title">Nécessaire</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>Isolation du sol</dt><dd>Tapis fin ou matelas gonflable</dd></div>
+          <div class="spec-row"><dt>Coupe-vent</dt><dd>Couverture de survie ou sursac</dd></div>
+          <div class="spec-row"><dt>Réserve sèche</dt><dd>Une couche jamais portée en marchant</dd></div>
+          <div class="spec-row"><dt>Énergie</dt><dd>Rations non périssables</dd></div>
+          <div class="spec-row"><dt>Éclairage</dt><dd>Frontale + piles de rechange</dd></div>
+        </dl>
+      </div>
+
+    </article>
+
+    <article class="body" id="ter-10">
+
+      <p class="eyebrow" style="margin-bottom:14px;">TER-10</p>
+      <h2 style="font-size:26px; margin:0 0 24px;">Se faire retrouver</h2>
+
+      <p>
+        La compétence la plus utile n'est pas de survivre longtemps seul,
+        c'est d'écourter l'attente. Tout ce qui suit vise à transmettre
+        une position exacte et à rester repérable.
+      </p>
+
+      <div class="procedure">
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Laisser un itinéraire avant de partir</p>
+            <p>Le geste le plus efficace se fait avant la sortie : dire à
+     quelqu'un où l'on va, par où, et à quelle heure on compte être
+     rentré, avec la consigne d'alerter passé un certain délai.</p>
+     <p>Sans cela, personne ne sait qu'il faut chercher, ni où. Beaucoup
+     de recherches longues commencent par cette absence d'information.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Appeler tôt plutôt que tard</p>
+            <p>En Europe, le 112 aboutit depuis n'importe quel téléphone mobile,
+     même sans abonnement actif, et bascule automatiquement sur le
+     réseau disponible le plus puissant. En France, le 114 permet
+     d'alerter par message écrit, notamment lorsqu'on ne peut pas
+     parler.</p>
+     <p>Si le réseau est trop faible pour un appel, un message texte
+     passe parfois là où la voix ne passe pas : il se réémet
+     automatiquement dès qu'un signal apparaît.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Transmettre une position exploitable</p>
+            <p>Donner des coordonnées, pas une description. La plupart des
+     téléphones affichent la latitude et la longitude dans l'application
+     de cartographie ou de boussole ; les noter avant que la batterie ne
+     faiblisse.</p>
+     <p>À défaut, décrire dans cet ordre : commune, massif ou vallée,
+     dernier point remarquable dépassé, direction et durée de marche
+     depuis ce point, altitude estimée. Ajouter le nombre de personnes,
+     l'état de chacun et le matériel dont on dispose.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Économiser la batterie dès le doute</p>
+            <p>Passer en mode économie, couper les données et la recherche
+     permanente de réseau, baisser la luminosité, garder le téléphone au
+     chaud contre le corps — le froid fait chuter la capacité d'une
+     batterie de manière spectaculaire.</p>
+     <p>Convenir d'un horaire de rappel avec les secours plutôt que
+     laisser l'appareil allumé en permanence.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Se signaler par le son et la lumière</p>
+            <p>Un sifflet porte bien plus loin que la voix et ne fatigue pas.
+     La convention en montagne : six signaux par minute, une minute de
+     pause, puis on recommence — la réponse est de trois signaux par
+     minute.</p>
+     <p>De nuit, une frontale en clignotement se repère de très loin.
+     De jour, une surface réfléchissante orientée vers un hélicoptère ou
+     un observatoire lointain fonctionne remarquablement bien.</p>
+          </div>
+        </div>
+
+        <div class="etape">
+          <div>
+            <p class="etape-titre">Rester visible et rester sur place</p>
+            <p>Une fois l'alerte donnée, ne plus se déplacer sauf danger
+     immédiat : les secours cherchent là où l'on a annoncé être, et un
+     blessé qui bouge rallonge les recherches.</p>
+     <p>Choisir un endroit dégagé si possible, marquer sa présence avec
+     ce qui contraste — vêtement clair étalé, cercle de pierres —, et se
+     rendre visible depuis le haut : un hélicoptère voit mal sous un
+     couvert dense.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="warn">
+        <p class="warn-label">Points de prudence</p>
+        <p>
+          Les numéros et les conventions cités valent pour l'Europe.
+          Ailleurs, se renseigner avant le départ sur le numéro d'urgence
+          local et sur l'organisme compétent en montagne ou en mer.
+          Une balise de détresse satellitaire reste le seul moyen fiable
+          hors couverture réseau : c'est un achat à envisager dès qu'on
+          sort régulièrement de zones couvertes.
+        </p>
+      </div>
+
+      <div class="specs">
+        <p class="specs-title">Nécessaire</p>
+        <dl class="specs-grid">
+          <div class="spec-row"><dt>Sifflet</dt><dd>Sur la bretelle du sac</dd></div>
+          <div class="spec-row"><dt>Frontale</dt><dd>Mode clignotant disponible</dd></div>
+          <div class="spec-row"><dt>Énergie</dt><dd>Batterie externe chargée</dd></div>
+          <div class="spec-row"><dt>Repli papier</dt><dd>Itinéraire laissé à un proche</dd></div>
+        </dl>
+      </div>
+
+    </article>
+
+    <footer class="site-footer reveal">
+      <span class="footer-links">
+        <a href="../projet.html">Le projet</a>
+        <a href="../histoire.html">Histoire</a>
+      </span>
+      <span class="num">RNRD — <span data-year></span></span>
+    </footer>
+  </main>
+
+  <script src="../assets/rnrd.js"></script>
+</body>
+
+</html>

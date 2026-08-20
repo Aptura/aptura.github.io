@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Plan du site. Ajouter une entrée <url> par nouvel article publié,
+     et mettre à jour <lastmod> au format AAAA-MM-JJ. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://rnrd.space/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Retex en sommeil : décommenter à la réouverture.
+  <url>
+      <loc>https://rnrd.space/retex/</loc>
+      <lastmod>2026-08-11</lastmod>
+      <priority>0.8</priority>
+    </url>
+  -->
+
+  <url>
+    <loc>https://rnrd.space/terrain/</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://rnrd.space/carnet/</loc>
+    <!-- à mettre à jour de temps en temps : c'est la seule ligne du
+         carnet, quelle que soit la quantité de notes -->
+    <lastmod>2026-08-11</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Sections en sommeil : décommenter à l'ouverture, et mettre
+       lastmod à la date réelle de mise en ligne.
+  <url>
+    <loc>https://rnrd.space/vision/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://rnrd.space/necessaire/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  -->
+
+  <url>
+    <loc>https://rnrd.space/histoire.html</loc>
+    <lastmod>2026-08-11</lastmod>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://rnrd.space/projet.html</loc>
+    <lastmod>2026-08-11</lastmod>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

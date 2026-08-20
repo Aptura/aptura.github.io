@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ⚠ SECTION EN SOMMEIL
+       La section existe mais n'est ni liée depuis l'accueil, ni
+       indexée. Pour la rouvrir : voir GUIDE.md, « Ouvrir une
+       section en sommeil ». Retirer alors cette balise. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0e0f0d">
+  <meta name="color-scheme" content="dark">
+  <title>Retex — RNRD</title>
+  <meta name="description" content="Tests et retours d'expérience sur du matériel outdoor et EDC choisi pour durer.">
+  <link rel="canonical" href="https://rnrd.space/retex/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Retex — matériel testé à l'usage">
+  <meta property="og:description"
+    content="Tests et retours d'expérience sur du matériel outdoor et EDC choisi pour durer.">
+  <meta property="og:url" content="https://rnrd.space/retex/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="RNRD">
+  <meta property="og:image" content="https://rnrd.space/assets/img/partage.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="RNRD — vivre avec peu, dehors autant que possible">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%236b6a61' stroke-width='1.2'/%3E%3Ccircle cx='16' cy='5' r='2.6' fill='%23c2884a'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23e8e6df'/%3E%3C/svg%3E">
+  <!-- préchargement des deux graisses les plus utilisées :
+     évite le bref changement de police au chargement -->
+  <link rel="preload" href="../assets/fonts/inter-v20-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/manrope-v20-latin-200.woff2" as="font" type="font/woff2" crossorigin>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Retex — RNRD",
+  "description": "Tests et retours d'expérience sur du matériel outdoor et EDC choisi pour durer.",
+  "url": "https://rnrd.space/retex/",
+  "inLanguage": "fr-FR",
+  "isPartOf": { "@type": "WebSite", "name": "RNRD", "url": "https://rnrd.space/" }
+}
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "RNRD", "item": "https://rnrd.space/" },
+    { "@type": "ListItem", "position": 2, "name": "Retex", "item": "https://rnrd.space/retex/" }
+  ]
+}
+  </script>
+  <!-- La feuille commune porte la structure ; celle du mode terrain
+       ne fait que redéfinir les variables. L'ordre est impératif. -->
+  <link rel="stylesheet" href="../assets/rnrd.css">
+  <link rel="stylesheet" href="../assets/rnrd-terrain.css">
+  <style>
+  </style>
+</head>
+<!-- centered : la page se centre tant que le contenu tient à l'écran,
+     puis défile normalement dès qu'il y a assez d'articles -->
+
+<body class="centered" data-code="RETEX">
+
+  <main class="wrap">
+
+    <a class="crumb reveal" href="../index.html"><span class="chev">‹</span> RNRD</a>
+
+    <p class="eyebrow reveal">Retex</p>
+    <h1 class="reveal">Matériel testé,<br>à l'usage.</h1>
+    <p class="lede reveal">
+      Des tests et des retours d'expérience sur du matériel choisi pour durer :
+      multifonction, compact, réparable. Pas de comparatif exhaustif,
+      juste ce que j'utilise vraiment et ce que ça devient sur la durée.
+    </p>
+
+    <p class="section-label reveal">Articles<span class="section-count"><span class="sep">//</span><span data-article-count></span></span></p>
+
+    <div class="article-list reveal" id="articleList" data-code-prefix="RTX"></div>
+
+    <footer class="site-footer reveal">
+      <span class="footer-links">
+        <a href="../projet.html">Le projet</a>
+        <a href="../histoire.html">Histoire</a>
+      </span>
+      <span class="num">RNRD — <span data-year></span></span>
+    </footer>
+  </main>
+
+  <script>
+    /* ================================================================
+       CATALOGUE DES ARTICLES
+       Seul endroit à modifier pour publier. Une entrée par article.
+       L'ordre n'a pas d'importance : le tri se fait par date,
+       du plus récent au plus ancien.
+    
+       slug     chemin du fichier depuis ce dossier
+       title    titre affiché dans la liste
+       date     format AAAA-MM-JJ (obligatoire pour le tri)
+       excerpt  une phrase de résumé
+       cover    chemin de la vignette (laisser "" si aucune photo)
+       tag      catégorie affichée avant la date
+       ================================================================ */
+    var ARTICLES = [
+      // Exemple d'article (à copier/coller pour ajouter un article) :
+      // {
+      //   slug: "articles/modele.html",
+      //   title: "Civivi Elementum II — six mois en usage quotidien",
+      //   date: "2026-07-14",
+      //   excerpt: "Un EDC pensé pour être porté tous les jours : ce qui tient, ce qui montre ses limites.",
+      //   cover:   "articles/photos/vignette.jpg",
+      //   tag: "Outils · Coutellerie"
+      // }
+      // {
+      //   slug:    "articles/nom-du-fichier.html",
+      //   title:   "…",
+      //   date:    "AAAA-MM-JJ",
+      //   excerpt: "…",
+      //   cover:   "articles/photos/vignette.jpg",
+      //   tag:     "Catégorie"
+      // },
+    ];
+  </script>
+  <script src="../assets/rnrd.js"></script>
+</body>
+
+</html>

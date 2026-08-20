@@ -1,0 +1,1856 @@
+/* ============================================================
+   RNRD — feuille de style commune
+   -------------------------------------------------------------
+   Direction artistique : cleancore / spatial.
+   Références : intérieur de capsule Crew Dragon (blanc immaculé,
+   angles adoucis, filets d'un cheveu, étiquettes techniques en
+   petites capitales espacées), esthétique cleancore.
+   Principe : rien de décoratif. Chaque filet, chaque étiquette,
+   chaque chiffre porte une information.
+   À réutiliser sur toute page future du projet RNRD.
+   ============================================================ */
+
+/* ============================================================
+   POLICES
+   -------------------------------------------------------------
+   Polices hébergées avec le site, dans assets/fonts/.
+   Aucune requête vers un serveur extérieur : l'adresse IP des
+   visiteurs n'est transmise à personne, et l'affichage est plus
+   rapide qu'avec un service distant.
+
+   Les balises <link> vers fonts.googleapis.com ont été retirées
+   de toutes les pages. Ne pas les remettre.
+   ============================================================ */
+
+/* Repli : si un fichier manque, le texte s'affiche dans la police
+   système la plus proche. Voir la variable --sans plus bas. */
+
+@font-face{
+  font-family:'Manrope';
+  src:url('fonts/manrope-v20-latin-200.woff2') format('woff2');
+  font-weight:200; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Manrope';
+  src:url('fonts/manrope-v20-latin-300.woff2') format('woff2');
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Manrope';
+  src:url('fonts/manrope-v20-latin-regular.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Manrope';
+  src:url('fonts/manrope-v20-latin-500.woff2') format('woff2');
+  font-weight:500; font-style:normal; font-display:swap;
+}
+
+@font-face{
+  font-family:'Inter';
+  src:url('fonts/inter-v20-latin-300.woff2') format('woff2');
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Inter';
+  src:url('fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Inter';
+  src:url('fonts/inter-v20-latin-500.woff2') format('woff2');
+  font-weight:500; font-style:normal; font-display:swap;
+}
+
+:root{
+  /* — surfaces — */
+  --bg:#fcfcfb;
+  --bg-2:#f4f4f1;
+  --bg-3:#eeeeea;
+
+  /* — encres — */
+  --ink:#141417;
+  --ink-soft:#6e6e68;
+  --ink-faint:#a4a49b;
+
+  /* — filets — */
+  --line:#e3e3dd;
+  --line-strong:#cfcfc7;
+
+  /* — accent, employé avec parcimonie — */
+  --accent:#7f97e3;
+  --accent-soft:#e6ebfa;
+
+  /* nappes de lumière du fond de page — redéfinies en mode terrain */
+  --glow-1:rgba(127,151,227,.055);
+  --glow-2:rgba(127,151,227,.03);
+
+  /* — géométrie — */
+  --radius:3px;
+  --hair:1px;
+}
+
+*{ box-sizing:border-box; }
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  /* le site est conçu en clair : empêche les navigateurs d'imposer
+     une inversion automatique des couleurs */
+  color-scheme:light;
+}
+html,body{ margin:0; padding:0; }
+body{
+  /* Éclairage de salle blanche : pas de source ponctuelle, une nappe
+     très douce qui décolle le fond du blanc papier. Deux lueurs à
+     peine perceptibles, l'une neutre, l'autre teintée de l'accent.
+     Sans elles, le blanc paraît plat ; avec elles, il paraît éclairé. */
+  background:
+    radial-gradient(120% 80% at 78% -10%, var(--glow-1), transparent 60%),
+    radial-gradient(90% 60% at 8% 105%, var(--glow-2), transparent 65%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:'Inter', sans-serif;
+  font-weight:300;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  position:relative;
+  /* ligatures et chiffres proportionnels par défaut ; les chiffres
+     tabulaires sont demandés au cas par cas via .num */
+  font-feature-settings:"kern" 1, "liga" 1;
+  text-rendering:optimizeLegibility;
+  /* interdit au navigateur de fabriquer une fausse graisse ou une
+     fausse italique quand un fichier de police manque : le défaut
+     s'affiche alors clairement, au lieu d'un texte discrètement
+     plus gras qu'il ne devrait l'être */
+  font-synthesis:none;
+  -webkit-font-synthesis:none;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+
+/* accessibilité : repère clavier cohérent partout */
+:focus-visible{
+  outline:1px solid var(--accent);
+  outline-offset:3px;
+}
+
+/* chiffres alignés — utile dans les fiches techniques et les compteurs */
+.num{ font-variant-numeric:tabular-nums; letter-spacing:.06em; }
+
+/* ligne d'horizon fixe en bas de page — repère constant */
+body::after{
+  content:"";
+  position:fixed;
+  left:0; right:0; bottom:0;
+  height:var(--hair);
+  background:var(--line);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* ============================================================
+   MISE EN PAGE
+   ============================================================ */
+
+.wrap{
+  /* Largeur unique pour toutes les pages : le cadre de lecture ne
+     bouge pas d'une page à l'autre. La longueur de ligne du texte
+     est limitée séparément, en caractères, dans chaque bloc. */
+  max-width:760px;
+  width:100%;
+  margin:auto;              /* centre verticalement quand le contenu est court */
+  padding:88px 28px 96px;
+  position:relative;
+  z-index:2;                /* au-dessus de la trame de fond */
+}
+
+/* Les pages courtes se centrent, les longues défilent normalement.
+   « safe » est indispensable : sans lui, dès que le contenu dépasse
+   la hauteur de l'écran, le centrage rogne le haut de la page et
+   les premières lignes deviennent inatteignables. Le carnet et la
+   liste d'articles étant appelés à grandir, le risque est réel. */
+body.centered{
+  display:flex;
+  flex-direction:column;
+  justify-content:safe center;
+}
+
+/* repères de coupe fixés aux coins de la fenêtre — vocabulaire de plan
+   technique. Indépendants du contenu : aucun conflit d'alignement avec
+   le texte, quelle que soit la page ou la taille d'écran. */
+body::before{
+  content:"";
+  position:fixed;
+  top:26px; left:26px;
+  width:18px; height:18px;
+  border-top:var(--hair) solid var(--line-strong);
+  border-left:var(--hair) solid var(--line-strong);
+  pointer-events:none;
+  z-index:1;
+}
+.corner-mark{
+  position:fixed;
+  top:26px; right:26px;
+  width:18px; height:18px;
+  border-top:var(--hair) solid var(--line-strong);
+  border-right:var(--hair) solid var(--line-strong);
+  pointer-events:none;
+  z-index:1;
+}
+
+@media (max-width:640px){
+  .wrap{ padding:64px 20px 80px; }
+  body::before, .corner-mark{ top:16px; width:14px; height:14px; }
+  body::before{ left:16px; }
+  .corner-mark{ right:16px; }
+}
+
+/* ============================================================
+   ANNOTATIONS D'ANGLE
+   Micro-texte technique posé près des repères de coupe, comme
+   les étiquettes de panneau d'un module habité. Volontairement
+   au seuil de la lisibilité : c'est une indication de bord, pas
+   une information à lire. Masqué sur petit écran et à l'impression.
+   ============================================================ */
+
+.edge-note{
+  position:fixed;
+  top:29px;
+  font-size:8.5px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--line-strong);
+  font-weight:500;
+  pointer-events:none;
+  user-select:none;
+  z-index:1;
+  line-height:1;
+}
+.edge-note.left{ left:56px; }
+.edge-note.right{ right:56px; text-align:right; }
+.edge-note .sep{ opacity:.55; margin:0 6px; }
+
+@media (max-width:900px){
+  .edge-note{ display:none; }
+}
+
+/* ============================================================
+   ÉTIQUETTES ET EN-TÊTES
+   ============================================================ */
+
+/* étiquette technique : petites capitales très espacées, prolongée
+   d'un filet qui court jusqu'au bord — vocabulaire de panneau de bord */
+.eyebrow{
+  font-weight:500;
+  font-size:10.5px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0 0 24px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.eyebrow::after{
+  content:"";
+  flex:1;
+  height:var(--hair);
+  background:var(--line);
+}
+
+h1{
+  font-family:'Manrope', sans-serif;
+  font-weight:200;
+  font-size:clamp(34px, 6.4vw, 54px);
+  letter-spacing:.045em;
+  margin:0 0 30px;
+  line-height:1.14;
+  /* une graisse fine à grande taille demande un léger resserrage
+     optique pour ne pas paraître délavée */
+  word-spacing:.02em;
+}
+
+/* ------------------------------------------------------------
+   SIGNATURE — page d'ancrage uniquement
+   L'interlettrage se resserre au chargement, comme un instrument
+   qui se cale sur sa mesure. Aucun élément ajouté : c'est le mot
+   lui-même qui se met en place.
+   ------------------------------------------------------------ */
+.js-anim h1.wordmark{
+  animation:calage 1.15s cubic-bezier(.16,.7,.3,1) both;
+}
+@keyframes calage{
+  from{ letter-spacing:.30em; opacity:0; }
+  to{   letter-spacing:.045em; opacity:1; }
+}
+
+/* ------------------------------------------------------------
+   CURSEUR DE SAISIE
+   Employé une seule fois, sur le sur-titre de la page d'ancrage,
+   pendant la frappe puis quelques clignotements avant de
+   disparaître. Un curseur qui clignote indéfiniment finit par
+   accrocher l'œil en permanence.
+   ------------------------------------------------------------ */
+.caret{
+  display:inline-block;
+  width:5px;
+  height:9px;
+  margin-left:4px;
+  background:var(--accent);
+  vertical-align:baseline;
+  animation:clignote .9s step-end infinite;
+}
+@keyframes clignote{
+  0%, 49%   { opacity:1; }
+  50%, 100% { opacity:0; }
+}
+
+.lede{
+  font-size:17px;
+  line-height:1.78;
+  color:var(--ink-soft);
+  font-weight:300;
+  max-width:56ch;
+  margin:0 0 56px;
+}
+
+.section-label{
+  font-size:10.5px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin:0 0 24px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.section-label::after{
+  content:"";
+  flex:1;
+  height:var(--hair);
+  background:var(--line);
+}
+/* compteur en fin d'étiquette : indication d'inventaire, comme un
+   numéro de lot sur un panneau technique */
+.section-count{
+  color:var(--ink-faint);
+  font-weight:500;
+  letter-spacing:.18em;
+  flex:0 0 auto;
+  font-variant-numeric:tabular-nums;
+}
+.section-count .sep{ opacity:.5; margin-right:7px; }
+
+/* qualificatif du groupe : une nuance plus claire que l'étiquette,
+   pour se lire comme une précision et non comme un second titre */
+.section-qualifier{
+  color:var(--line-strong);
+  font-weight:500;
+  letter-spacing:.3em;
+  flex:0 0 auto;
+  margin-left:-4px;
+}
+.section-qualifier::before{
+  content:"·";
+  margin:0 10px 0 0;
+  opacity:.7;
+}
+
+/* ============================================================
+   FIL D'ARIANE
+   ============================================================ */
+
+.crumb{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:10.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--ink-faint);
+  text-decoration:none;
+  margin-bottom:72px;
+  transition:color .2s ease;
+}
+.crumb .chev{ display:inline-block; transition:transform .2s ease; font-size:13px; }
+.crumb:hover{ color:var(--ink); }
+.crumb:hover .chev{ transform:translateX(-3px); }
+
+/* ============================================================
+   MODULES (accueil RNRD)
+   ============================================================ */
+
+.modules{ display:flex; flex-direction:column; }
+.module{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:24px 0;
+  border-top:var(--hair) solid var(--line);
+  text-decoration:none;
+  color:inherit;
+  transition:padding-left .3s cubic-bezier(.2,.8,.3,1), opacity .25s ease;
+}
+/* même logique que la liste d'articles : filets entre les éléments
+   seulement, pas de ligne d'ouverture ni de fermeture */
+.modules .module:first-child{ border-top:none; padding-top:4px; }
+.module.active:hover{ padding-left:8px; }
+.module.pending{ cursor:default; }
+.module.pending .module-name,
+.module.pending .module-desc{ color:var(--ink-faint); }
+
+.module-left{ display:flex; align-items:center; gap:18px; min-width:0; }
+
+/* numéro d'ordre du module : reprend la numérotation des sections
+   d'article, pour que tout le site compte de la même façon */
+.module-index{
+  font-size:9.5px;
+  letter-spacing:.16em;
+  color:var(--line-strong);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+  flex:0 0 auto;
+  width:18px;
+}
+.module.active .module-index{ color:var(--ink-faint); }
+
+/* témoin d'état : plein = actif, cerclé = en attente */
+.status-dot{
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent);
+  flex:0 0 auto;
+  position:relative;
+}
+/* Halo d'activité — balayage de radar.
+
+   Deux anneaux décalés d'une demi-période : le second part quand le
+   premier est à mi-course, ce qui donne une impulsion toutes les
+   1,5 seconde et supprime tout temps mort entre deux ondes.
+
+   Positionnement par « inset » sur le témoin : les anneaux sont
+   centrés par construction, sans calcul de marge susceptible de
+   dériver selon la mise en page.
+
+   Pour la fluidité, la couche est promue sur le processeur
+   graphique (translateZ + backface-visibility) : les
+   transformations y sont appliquées en précision inférieure au
+   pixel. Sans cette promotion, un déplacement lent est arrondi au
+   pixel entier à chaque image et paraît saccadé. Firefox reste
+   moins fluide que les autres navigateurs sur ce point.
+
+   La courbe de progression ralentit à mesure que l'anneau
+   s'écarte, comme une onde qui perd de l'énergie. */
+.js-anim .module.active .status-dot::before,
+.js-anim .module.active .status-dot::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  border:1px solid var(--accent);
+  opacity:0;
+  pointer-events:none;
+  transform:translateZ(0) scale(1);
+  animation:halo 3s cubic-bezier(.22,.61,.36,1) infinite;
+  will-change:transform, opacity;
+  backface-visibility:hidden;
+}
+/* la valeur négative fait démarrer le second anneau en cours de
+   cycle, sans attendre : les deux ondes sont en place dès l'arrivée
+   sur la page */
+.js-anim .module.active .status-dot::after{ animation-delay:-1.5s; }
+
+@keyframes halo{
+  0%   { transform:translateZ(0) scale(1);   opacity:.55; }
+  100% { transform:translateZ(0) scale(2.8); opacity:0;   }
+}
+
+.module.pending .status-dot{
+  background:transparent;
+  box-shadow:inset 0 0 0 var(--hair) var(--line-strong);
+}
+
+/* ------------------------------------------------------------
+   TROISIÈME ÉTAT — section en service par intermittence
+   Le témoin n'annonce pas un état supposé : il est mis à jour au
+   chargement selon la réponse réelle du serveur (voir rnrd.js).
+   Trois situations, trois apparences :
+
+     vérification  point sourd qui respire     « Vérification »
+     en ligne      point d'accent + halo       « En ligne »
+     hors ligne    point plein, gris, immobile « Hors ligne »
+
+   Le halo garde partout le même sens : une activité constatée.
+   ------------------------------------------------------------ */
+.module.intermittent .status-dot{
+  background:var(--ink-faint);
+}
+.module.intermittent:hover{ padding-left:8px; }
+
+/* la section existe : son numéro se lit comme celui des sections
+   actives, pas comme celui des sections en sommeil */
+.module.intermittent .module-index{ color:var(--ink-faint); }
+
+/* — vérification en cours — */
+.module.intermittent.verification .status-dot{
+  background:var(--line-strong);
+  animation:sonde 1.5s ease-in-out infinite;
+}
+@keyframes sonde{
+  0%, 100% { opacity:1; }
+  50%      { opacity:.3; }
+}
+
+/* — station en ligne : même témoin que les sections actives — */
+.module.intermittent.en-ligne .status-dot{
+  background:var(--accent);
+  animation:none;
+}
+.js-anim .module.intermittent.en-ligne .status-dot::before,
+.js-anim .module.intermittent.en-ligne .status-dot::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  border:1px solid var(--accent);
+  opacity:0;
+  pointer-events:none;
+  transform:translateZ(0) scale(1);
+  animation:halo 3s cubic-bezier(.22,.61,.36,1) infinite;
+  will-change:transform, opacity;
+  backface-visibility:hidden;
+}
+.js-anim .module.intermittent.en-ligne .status-dot::after{ animation-delay:-1.5s; }
+
+/* — station hors ligne — */
+.module.intermittent.hors-ligne .status-dot{
+  background:var(--line-strong);
+  animation:none;
+}
+.module.intermittent.hors-ligne .module-name,
+.module.intermittent.hors-ligne .module-desc{ color:var(--ink-faint); }
+
+/* Flèche oblique sur les modules qui quittent le site */
+.module-tag .ext{
+  display:inline-block;
+  font-size:11px;
+  transition:transform .25s ease, color .2s ease;
+}
+.module.intermittent:hover .ext,
+.module.active:hover .ext{ transform:translate(3px,-3px); color:var(--ink); }
+
+.module-name{
+  font-family:'Manrope', sans-serif;
+  font-weight:400;
+  font-size:20px;
+  letter-spacing:.03em;
+}
+.module-desc{
+  font-size:13.5px;
+  color:var(--ink-faint);
+  font-weight:300;
+  margin-top:5px;
+  line-height:1.5;
+}
+.module-tag{
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
+}
+.module-tag .chev{
+  display:inline-block;
+  font-size:14px;
+  transition:transform .3s cubic-bezier(.2,.8,.3,1), color .2s ease;
+}
+.module.active:hover .chev{ transform:translateX(5px); color:var(--ink); }
+
+@media (max-width:560px){
+  .module-desc{ display:none; }
+}
+
+/* ============================================================
+   LISTE D'ARTICLES (accueil Retex)
+   ============================================================ */
+
+.article-list{ display:flex; flex-direction:column; }
+.article-item{
+  display:grid;
+  grid-template-columns:64px 156px 1fr;
+  align-items:start;
+  gap:24px;
+  padding:30px 0;
+  border-top:var(--hair) solid var(--line);
+  text-decoration:none;
+  color:inherit;
+  transition:padding-left .3s cubic-bezier(.2,.8,.3,1), opacity .25s ease;
+}
+/* les filets séparent les articles entre eux : ni ligne d'ouverture
+   (l'étiquette de section la fournit), ni ligne de fermeture (le pied
+   de page la fournit). Évite les doubles filets parallèles. */
+.article-list .article-item:first-child{ border-top:none; padding-top:6px; }
+.article-item:hover{ opacity:.68; padding-left:8px; }
+
+/* numéro d'ordre : information réelle (rang dans la série publiée) */
+.article-index{
+  font-size:10.5px;
+  letter-spacing:.14em;
+  color:var(--ink-faint);
+  font-weight:500;
+  padding-top:3px;
+}
+
+.article-thumb{
+  width:156px; height:117px;
+  background:var(--bg-2);
+  overflow:hidden;
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+}
+.article-thumb img{ width:100%; height:100%; object-fit:cover; }
+.article-thumb.empty{ display:flex; align-items:center; justify-content:center; }
+.article-thumb.empty::after{
+  content:"";
+  width:18px; height:18px;
+  border:var(--hair) solid var(--line-strong);
+  border-radius:50%;
+}
+
+.article-meta{
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:10px;
+  font-weight:500;
+}
+.article-title{
+  font-family:'Manrope', sans-serif;
+  font-weight:400;
+  font-size:19px;
+  letter-spacing:.02em;
+  margin-bottom:9px;
+  line-height:1.36;
+}
+.article-excerpt{
+  font-size:14px;
+  line-height:1.62;
+  color:var(--ink-soft);
+  font-weight:300;
+}
+
+@media (max-width:640px){
+  .article-item{ grid-template-columns:100px 1fr; gap:16px; }
+  .article-index{ display:none; }
+  .article-thumb{ width:100px; height:75px; }
+}
+
+/* état vide : section créée mais pas encore alimentée */
+.empty-state{
+  font-size:15px;
+  line-height:1.7;
+  color:var(--ink-faint);
+  font-style:italic;
+  margin:0;
+  padding:34px 0 34px 26px;
+  border-left:var(--hair) solid var(--line-strong);
+  max-width:52ch;
+}
+
+/* ============================================================
+   PAGE ARTICLE
+   ============================================================ */
+
+.article-deck{
+  font-size:18.5px;
+  line-height:1.62;
+  color:var(--ink-soft);
+  font-weight:300;
+  max-width:58ch;
+  margin:0 0 56px;
+}
+
+/* bandeau de contexte : les données du test, lisibles d'un coup d'œil */
+.meta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:36px;
+  margin-bottom:64px;
+  padding:24px 0;
+  border-top:var(--hair) solid var(--line);
+  border-bottom:var(--hair) solid var(--line);
+}
+.meta-row span{
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+}
+.meta-row span b{
+  display:block;
+  color:var(--ink);
+  font-size:14px;
+  letter-spacing:.01em;
+  text-transform:none;
+  margin-top:7px;
+  font-weight:400;
+}
+
+/* couverture : format naturel, jamais recadrée.
+   Deux équerres d'angle marquent le cadre sans l'alourdir —
+   vocabulaire du repère de mesure, pas de l'ornement. */
+.article-cover{
+  margin-bottom:64px;
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+  background:var(--bg-2);
+  overflow:hidden;
+  position:relative;
+}
+.article-cover::before,
+.article-cover::after{
+  content:"";
+  position:absolute;
+  width:11px; height:11px;
+  pointer-events:none;
+  z-index:2;
+}
+.article-cover::before{
+  top:8px; left:8px;
+  border-top:var(--hair) solid var(--line-strong);
+  border-left:var(--hair) solid var(--line-strong);
+}
+.article-cover::after{
+  bottom:8px; right:8px;
+  border-bottom:var(--hair) solid var(--line-strong);
+  border-right:var(--hair) solid var(--line-strong);
+}
+.article-cover img{
+  width:100%;
+  height:auto;
+  max-height:76vh;
+  object-fit:contain;
+  margin:0 auto;
+}
+
+article.body p{
+  font-size:17px;
+  line-height:1.86;
+  color:var(--ink);
+  font-weight:300;
+  margin:0 0 1.6em;
+  max-width:64ch;
+}
+article.body h2{
+  scroll-margin-top:88px;
+  font-family:'Manrope', sans-serif;
+  font-weight:400;
+  font-size:23px;
+  letter-spacing:.02em;
+  margin:2.8em 0 1em;
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+}
+article.body h2 .h2-index{
+  color:var(--ink-faint);
+  font-weight:400;
+  font-size:.62em;
+  letter-spacing:.14em;
+  flex:0 0 auto;
+}
+
+/* photo seule, format naturel */
+article.body figure{ margin:56px 0; }
+article.body figure img{
+  width:100%;
+  height:auto;
+  background:var(--bg-2);
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+}
+article.body figcaption{
+  font-size:12px;
+  color:var(--ink-faint);
+  letter-spacing:.03em;
+  line-height:1.55;
+  margin-top:14px;
+  padding-left:16px;
+  border-left:var(--hair) solid var(--line-strong);
+}
+
+/* ============================================================
+   CARROUSEL
+   Présenté comme un module identifié : en-tête, compteur, cadre.
+   ============================================================ */
+
+.carousel{
+  margin:56px 0;
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+  background:var(--bg);
+  overflow:hidden;
+}
+
+.carousel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 18px;
+  border-bottom:var(--hair) solid var(--line);
+  background:var(--bg-2);
+}
+.carousel-head-label{
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:500;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.carousel-head-label::before{
+  content:"";
+  width:6px; height:6px;
+  border:var(--hair) solid var(--ink-faint);
+  border-radius:50%;
+  flex:0 0 auto;
+}
+.carousel-counter{
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--ink);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+.carousel-counter .total{ color:var(--ink-faint); }
+
+.carousel-track{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  background:var(--bg-2);
+  scrollbar-width:none;
+  cursor:grab;
+}
+.carousel-track::-webkit-scrollbar{ display:none; }
+.carousel-slide{
+  flex:0 0 100%;
+  scroll-snap-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+}
+.carousel-slide img{
+  width:100%;
+  height:auto;
+  max-height:68vh;
+  object-fit:contain;
+}
+
+.carousel-foot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:14px 18px;
+  border-top:var(--hair) solid var(--line);
+}
+.carousel-caption{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  line-height:1.5;
+  margin:0;
+  flex:1;
+  min-width:0;
+}
+.carousel-nav{ display:flex; align-items:center; gap:12px; flex:0 0 auto; }
+
+/* flèches : boutons cadrés, taille confortable au doigt */
+.carousel-btn{
+  width:34px; height:34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg);
+  border:var(--hair) solid var(--line-strong);
+  border-radius:var(--radius);
+  cursor:pointer;
+  color:var(--ink);
+  font-size:15px;
+  line-height:1;
+  padding:0;
+  transition:background .18s ease, border-color .18s ease, color .18s ease;
+}
+.carousel-btn:hover:not(:disabled){ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+.carousel-btn:disabled{ opacity:.25; cursor:default; }
+
+.carousel-dots{ display:flex; gap:5px; }
+.carousel-dot{
+  width:22px; height:3px;
+  background:var(--line-strong);
+  border:none; padding:0;
+  border-radius:2px;
+  cursor:pointer;
+  transition:background .2s ease;
+}
+.carousel-dot.current{ background:var(--ink); }
+
+@media (max-width:560px){
+  .carousel-foot{ flex-direction:column; align-items:stretch; gap:14px; }
+  .carousel-nav{ justify-content:space-between; }
+}
+
+/* ============================================================
+   FICHE TECHNIQUE
+   ============================================================ */
+
+.specs{ margin:64px 0; }
+.specs-title{
+  font-size:10px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin:0 0 4px;
+  padding-bottom:12px;
+  border-bottom:var(--hair) solid var(--line-strong);
+}
+.specs-title + .specs-grid{ margin-bottom:44px; }
+.specs-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:44px;
+  margin:0;
+}
+.spec-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+  padding:12px 0;
+  border-bottom:var(--hair) solid var(--line);
+  font-size:13.5px;
+}
+.spec-row dt{ color:var(--ink-faint); font-weight:400; flex:0 0 auto; }
+.spec-row dd{
+  margin:0;
+  color:var(--ink);
+  font-weight:400;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+@media (max-width:640px){
+  .specs-grid{ grid-template-columns:1fr; column-gap:0; }
+  .specs-title + .specs-grid{ margin-bottom:32px; }
+}
+
+/* ============================================================
+   ÉCHELLE D'APPRÉCIATION
+   ============================================================ */
+
+.ratings{
+  margin:56px 0;
+  padding:26px 0;
+  border-top:var(--hair) solid var(--line-strong);
+  border-bottom:var(--hair) solid var(--line-strong);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.rating{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  gap:18px;
+}
+.rating-label{
+  font-size:12.5px;
+  letter-spacing:.04em;
+  color:var(--ink-soft);
+  margin:0;
+}
+.rating-scale{ display:flex; gap:4px; }
+.rating-tick{ width:22px; height:3px; background:var(--line-strong); border-radius:2px; }
+.rating-tick.filled{ background:var(--ink); }
+.rating-value{
+  font-size:12px;
+  color:var(--ink);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.06em;
+  min-width:34px;
+  text-align:right;
+}
+@media (max-width:520px){
+  .rating{ grid-template-columns:1fr auto; row-gap:8px; }
+  .rating-scale{ grid-column:1 / -1; }
+}
+
+/* ============================================================
+   CITATION
+   ============================================================ */
+
+.pull-quote{
+  border-left:var(--hair) solid var(--ink);
+  padding-left:28px;
+  margin:64px 0;
+  font-family:'Manrope', sans-serif;
+  font-weight:300;
+  font-size:25px;
+  line-height:1.44;
+  letter-spacing:.005em;
+  max-width:50ch;
+}
+
+/* ============================================================
+   VERDICT
+   ============================================================ */
+
+.verdict{
+  border:var(--hair) solid var(--line-strong);
+  border-radius:var(--radius);
+  padding:30px 32px;
+  margin:64px 0;
+  background:var(--bg-2);
+}
+.verdict-label{
+  font-size:10px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:500;
+  margin-bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.verdict-label::before{
+  content:"";
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  flex:0 0 auto;
+}
+.verdict p{ margin:0 0 1.3em; max-width:62ch; }
+.verdict p:last-child{ margin-bottom:0; }
+@media (max-width:560px){
+  .verdict{ padding:24px 22px; }
+}
+
+/* ============================================================
+   JAUGE DE LECTURE
+   Filet d'un cheveu en haut de page indiquant la progression dans
+   l'article. Information réelle, pas décoration : sur un long test
+   matériel, le lecteur sait où il en est.
+   ============================================================ */
+
+.read-progress{
+  position:fixed;
+  top:0; left:0;
+  height:4px;
+  width:0;
+  background:var(--accent);
+  z-index:5;
+  pointer-events:none;
+  transition:width .08s linear;
+}
+
+/* ============================================================
+   TRANSITION ENTRE PAGES
+   Fondu bref au départ, apparition en séquence à l'arrivée.
+   Uniquement si le script s'exécute : sans lui, la navigation
+   reste instantanée et parfaitement fonctionnelle.
+   ============================================================ */
+
+.js-anim .wrap,
+.js-anim .orbit{
+  transition:opacity .26s ease, transform .26s ease;
+}
+.js-anim.is-leaving .wrap{
+  opacity:0;
+  transform:translateY(-6px);
+}
+.js-anim.is-leaving .orbit{ opacity:0; }
+
+/* ============================================================
+   APPARITION AU CHARGEMENT ET TRANSITION ENTRE PAGES
+
+   La classe .js-anim est posée par le script commun. Sans
+   JavaScript, tout le contenu reste visible immédiatement.
+
+   Si le visiteur a demandé de réduire les animations, le mouvement
+   vertical est supprimé mais le fondu est conservé : la séquence
+   reste perceptible sans déplacement à l'écran.
+   ============================================================ */
+
+.js-anim .reveal{
+  opacity:0;
+  transform:translateY(9px);
+  animation:reveal .68s cubic-bezier(.2,.8,.3,1) forwards;
+}
+.js-anim.reduced .reveal{
+  transform:none;
+  animation:revealFade .5s ease forwards;
+}
+
+/* Décalages jusqu'au douzième bloc. Une page d'article en compte
+   huit ; la marge évite qu'un bloc ajouté plus tard se retrouve
+   sans décalage et apparaisse avant ceux qui le précèdent. */
+.js-anim .reveal:nth-child(1){ animation-delay:0.02s; }
+.js-anim .reveal:nth-child(2){ animation-delay:0.09s; }
+.js-anim .reveal:nth-child(3){ animation-delay:0.16s; }
+.js-anim .reveal:nth-child(4){ animation-delay:0.23s; }
+.js-anim .reveal:nth-child(5){ animation-delay:0.30s; }
+.js-anim .reveal:nth-child(6){ animation-delay:0.37s; }
+.js-anim .reveal:nth-child(7){ animation-delay:0.44s; }
+.js-anim .reveal:nth-child(8){ animation-delay:0.51s; }
+.js-anim .reveal:nth-child(9){ animation-delay:0.58s; }
+.js-anim .reveal:nth-child(10){ animation-delay:0.65s; }
+.js-anim .reveal:nth-child(11){ animation-delay:0.72s; }
+.js-anim .reveal:nth-child(12){ animation-delay:0.79s; }
+
+@keyframes reveal{
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes revealFade{
+  to{ opacity:1; }
+}
+
+/* Sortie de page : fondu bref déclenché au clic sur un lien interne.
+   Volontairement court (170 ms) — au-delà, une transition devient une
+   attente plutôt qu'un raccord. */
+.js-anim body,
+.js-anim .wrap{ transition:opacity .17s ease; }
+.js-anim.leaving .wrap{ opacity:0; }
+.js-anim.leaving .orbit{ opacity:0; transition:opacity .17s ease; }
+
+/* ============================================================
+   VIDÉO
+   Même vocabulaire que le carrousel : cadre, en-tête étiqueté,
+   légende en pied. Le format s'adapte à la largeur de l'article
+   sans jamais la dépasser, et la hauteur suit le ratio déclaré.
+   ============================================================ */
+
+.video{
+  margin:56px 0;
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+  background:var(--bg);
+  overflow:hidden;
+}
+
+.video-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 18px;
+  border-bottom:var(--hair) solid var(--line);
+  background:var(--bg-2);
+}
+.video-head-label{
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:500;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+/* petit triangle de lecture, tracé en CSS */
+.video-head-label::before{
+  content:"";
+  width:0; height:0;
+  border-left:6px solid var(--ink-faint);
+  border-top:4px solid transparent;
+  border-bottom:4px solid transparent;
+  flex:0 0 auto;
+}
+.video-duration{
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--ink-faint);
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* conteneur au ratio : 16/9 par défaut, modifiable au cas par cas */
+.video-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 9;
+  background:var(--bg-3);
+}
+.video-frame > video,
+.video-frame > iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  object-fit:contain;
+  background:#000;
+}
+/* vidéo verticale (téléphone) : ajouter la classe portrait */
+.video-frame.portrait{ aspect-ratio:9 / 16; max-height:78vh; margin:0 auto; }
+/* pour un ratio libre, remplacer aspect-ratio en style en ligne */
+
+.video-foot{
+  padding:14px 18px;
+  border-top:var(--hair) solid var(--line);
+}
+.video-caption{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  line-height:1.5;
+  margin:0;
+}
+
+/* ============================================================
+   NOTE EN MARGE
+   Information secondaire : précision technique, mise en garde,
+   mise à jour postérieure à la publication.
+   ============================================================ */
+
+.note{
+  margin:48px 0;
+  padding:20px 24px;
+  border-left:2px solid var(--line-strong);
+  background:var(--bg-2);
+  border-radius:0 var(--radius) var(--radius) 0;
+}
+.note-label{
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin:0 0 10px;
+}
+.note p{
+  font-size:14.5px !important;
+  line-height:1.7 !important;
+  color:var(--ink-soft) !important;
+  margin:0 !important;
+  max-width:60ch;
+}
+
+/* ============================================================
+   DÉTAILS
+   ============================================================ */
+
+::selection{
+  background:var(--accent-soft);
+  color:var(--ink);
+}
+
+/* Liens externes signalés par une flèche oblique : le lecteur sait
+   avant de cliquer qu'il quitte le site. Les liens internes n'ont
+   pas de marque — l'absence de signe est aussi une information. */
+article.body a[href^="http"]::after,
+.journal-body a[href^="http"]::after{
+  content:"\2197";
+  display:inline-block;
+  margin-left:3px;
+  font-size:.82em;
+  color:var(--ink-faint);
+  vertical-align:baseline;
+}
+
+/* Liens dans le corps de texte : soulignement fin décollé du texte,
+   qui s'épaissit au survol. Plus net qu'un simple changement de
+   couleur, moins lourd qu'un soulignement plein. */
+article.body p a,
+.journal-body p a{
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:var(--hair) solid var(--line-strong);
+  padding-bottom:1px;
+  transition:border-color .2s ease;
+}
+article.body p a:hover,
+.journal-body p a:hover{ border-color:var(--ink); }
+
+/* Apparition des images une fois chargées : évite le surgissement
+   brutal quand une photo arrive après le texte. La classe est posée
+   par script — sans lui, les images restent simplement visibles. */
+.js-anim img.is-loading{ opacity:0; }
+.js-anim img.is-loaded{
+  opacity:1;
+  transition:opacity .5s ease;
+}
+
+/* Survol d'une entrée de journal : le repère se remplit. */
+.journal-entry{ transition:opacity .25s ease; }
+.journal-body::before{ transition:box-shadow .25s ease, background-color .25s ease; }
+.journal-entry:hover .journal-body::before{
+  background:var(--accent);
+  box-shadow:0 0 0 var(--hair) var(--accent);
+}
+
+/* ============================================================
+   IMPRESSION
+   Un test matériel se lit aussi sur papier. Tout ce qui relève
+   de l'écran disparaît, le carrousel se déplie en colonne.
+   ============================================================ */
+
+@media print{
+  body{ background:#fff; color:#000; font-size:11pt; }
+  body{ background:#fff !important; }
+  body::before, body::after,
+  .corner-mark, .read-progress, .orbit, .crumb,
+  .edge-note, .caret, .toc, .to-top{ display:none !important; }
+
+  .journal-entry::before, .journal-body::before{ display:none !important; }
+  .journal-entry{ page-break-inside:avoid; }
+
+  .wrap{ max-width:none; padding:0; }
+
+  a{ text-decoration:none; }
+  /* l'adresse des liens externes est imprimée entre parenthèses */
+  article.body a[href^="http"]::after{
+    content:" (" attr(href) ")";
+    font-size:9pt;
+    color:#555;
+  }
+
+  .carousel-head, .carousel-foot,
+  .video-head, .video-foot,
+  footer.site-footer a{ display:none !important; }
+
+  /* le carrousel se déplie : toutes les photos les unes sous les autres */
+  .carousel{ border:none; }
+  .carousel-track{ display:block; overflow:visible; background:none; }
+  .carousel-slide{ display:block; page-break-inside:avoid; margin-bottom:8mm; }
+
+  .video{ display:none !important; }
+
+  h1, h2{ page-break-after:avoid; }
+  figure, .specs, .verdict, .ratings, .pull-quote{ page-break-inside:avoid; }
+
+  .verdict{ background:none; border:1pt solid #999; }
+  .note{ background:none; }
+}
+
+/* ============================================================
+   JOURNAL
+   Notes courtes, publiées au fil de l'eau. Chaque entrée tient
+   dans la page : pas de fichier par note, pas de page à ouvrir.
+   Colonne de dates à gauche, filet vertical continu, contenu à
+   droite — la lecture d'un relevé plutôt que d'un fil social.
+   ============================================================ */
+
+.journal{
+  display:flex;
+  flex-direction:column;
+}
+
+.journal-entry{
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:28px;
+  padding:0 0 44px;
+  position:relative;
+}
+.journal-entry:last-child{ padding-bottom:0; }
+
+/* filet vertical reliant les entrées */
+.journal-entry::before{
+  content:"";
+  position:absolute;
+  left:96px;
+  top:9px;
+  bottom:-9px;
+  width:var(--hair);
+  background:var(--line);
+}
+.journal-entry:last-child::before{ display:none; }
+
+.journal-date{
+  text-align:right;
+  /* respiration entre la date et le filet vertical, qui court
+     exactement au bord de cette colonne */
+  padding:1px 18px 0 0;
+  position:relative;
+  display:block;
+  text-decoration:none;
+  color:inherit;
+}
+/* la date sert de lien permanent vers la note : discret au repos,
+   souligné au survol comme n'importe quel lien */
+a.journal-date .journal-day{ transition:color .2s ease; }
+a.journal-date:hover .journal-day{ color:var(--accent); }
+
+/* décalage d'ancre : une note ciblée par un lien ne se colle pas
+   au bord haut de la fenêtre */
+.journal-entry{ scroll-margin-top:88px; }
+/* mise en évidence brève de la note ciblée */
+.journal-entry:target .journal-body::before{
+  background:var(--accent);
+  box-shadow:0 0 0 var(--hair) var(--accent);
+}
+.journal-day{
+  display:block;
+  font-family:'Manrope', sans-serif;
+  font-size:19px;
+  font-weight:300;
+  letter-spacing:.02em;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums;
+  line-height:1.1;
+}
+.journal-month{
+  display:block;
+  font-size:9.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin-top:5px;
+}
+
+/* point de repère posé sur le filet */
+.journal-body{
+  padding-left:2px;
+  position:relative;
+}
+.journal-body::before{
+  content:"";
+  position:absolute;
+  left:-30px;
+  top:8px;
+  width:5px; height:5px;
+  border-radius:50%;
+  background:var(--bg);
+  box-shadow:0 0 0 var(--hair) var(--line-strong);
+}
+
+.journal-tag{
+  font-size:9.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin:0 0 9px;
+}
+.journal-body p{
+  font-size:15.5px;
+  line-height:1.72;
+  color:var(--ink);
+  font-weight:300;
+  margin:0 0 1em;
+  max-width:58ch;
+}
+.journal-body p:last-child{ margin-bottom:0; }
+
+/* photo facultative, format naturel */
+.journal-figure{ margin:18px 0 0; }
+.journal-figure img{
+  width:100%;
+  height:auto;
+  max-height:52vh;
+  object-fit:contain;
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+  background:var(--bg-2);
+}
+.journal-figure figcaption{
+  font-size:11.5px;
+  color:var(--ink-faint);
+  margin-top:10px;
+  padding-left:14px;
+  border-left:var(--hair) solid var(--line-strong);
+}
+
+/* lien facultatif vers un article complet */
+.journal-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:14px;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--ink-faint);
+  text-decoration:none;
+  transition:color .2s ease;
+}
+.journal-link .chev{ display:inline-block; transition:transform .25s ease; font-size:13px; }
+.journal-link:hover{ color:var(--ink); }
+.journal-link:hover .chev{ transform:translateX(4px); }
+
+@media (max-width:600px){
+  .journal-entry{ grid-template-columns:64px 1fr; gap:18px; }
+  .journal-entry::before{ left:64px; }
+  .journal-body::before{ left:-20px; }
+  .journal-day{ font-size:17px; }
+  .journal-date{ padding-right:12px; }
+}
+
+/* ============================================================
+   VISION — planches photographiques
+   Une photo par planche, format naturel, jamais recadrée. La
+   légende porte le lieu et la date : une planche contact plutôt
+   qu'une galerie décorative.
+   ============================================================ */
+
+.plates{ display:flex; flex-direction:column; gap:72px; }
+
+.plate{ margin:0; position:relative; }
+
+.plate-frame{
+  border:var(--hair) solid var(--line);
+  border-radius:var(--radius);
+  background:var(--bg-2);
+  overflow:hidden;
+  position:relative;
+}
+.plate-frame img{
+  width:100%;
+  height:auto;
+  max-height:82vh;
+  object-fit:contain;
+  margin:0 auto;
+}
+/* équerres d'angle, comme sur les couvertures d'article */
+.plate-frame::before,
+.plate-frame::after{
+  content:"";
+  position:absolute;
+  width:11px; height:11px;
+  pointer-events:none;
+  z-index:2;
+}
+.plate-frame::before{
+  top:8px; left:8px;
+  border-top:var(--hair) solid var(--line-strong);
+  border-left:var(--hair) solid var(--line-strong);
+}
+.plate-frame::after{
+  bottom:8px; right:8px;
+  border-bottom:var(--hair) solid var(--line-strong);
+  border-right:var(--hair) solid var(--line-strong);
+}
+
+.plate-caption{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:20px;
+  margin-top:14px;
+  padding-left:16px;
+  border-left:var(--hair) solid var(--line-strong);
+}
+.plate-title{
+  font-size:13.5px;
+  color:var(--ink-soft);
+  line-height:1.5;
+  margin:0;
+  max-width:56ch;
+}
+.plate-meta{
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  white-space:nowrap;
+  flex:0 0 auto;
+  font-variant-numeric:tabular-nums;
+}
+@media (max-width:560px){
+  .plates{ gap:52px; }
+  .plate-caption{ flex-direction:column; gap:8px; }
+  .plate-meta{ white-space:normal; }
+}
+
+/* ============================================================
+   NÉCESSAIRE — inventaire
+   Réemploie la fiche technique : une catégorie par bloc, un objet
+   par ligne, la masse à droite. Les totaux se calculent seuls à
+   partir de l'attribut data-poids.
+   ============================================================ */
+
+.inv-summary{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:0;
+  border:var(--hair) solid var(--line-strong);
+  border-radius:var(--radius);
+  background:var(--bg-2);
+  margin:0 0 64px;
+  overflow:hidden;
+}
+.inv-cell{
+  padding:22px 20px;
+  border-right:var(--hair) solid var(--line);
+}
+.inv-cell:last-child{ border-right:none; }
+.inv-cell dt{
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin-bottom:9px;
+}
+.inv-cell dd{
+  margin:0;
+  font-family:'Manrope', sans-serif;
+  font-weight:300;
+  font-size:25px;
+  letter-spacing:.01em;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums;
+  line-height:1.1;
+}
+.inv-cell dd .unit{
+  font-family:'Inter', sans-serif;
+  font-size:12px;
+  color:var(--ink-faint);
+  letter-spacing:.08em;
+  margin-left:5px;
+  font-weight:400;
+}
+@media (max-width:600px){
+  .inv-summary{ grid-template-columns:1fr; }
+  .inv-cell{ border-right:none; border-bottom:var(--hair) solid var(--line); }
+  .inv-cell:last-child{ border-bottom:none; }
+}
+
+/* une ligne d'inventaire porte un nom, parfois une précision */
+.spec-row .spec-note{
+  display:block;
+  font-size:11.5px;
+  color:var(--ink-faint);
+  margin-top:3px;
+  font-weight:300;
+}
+
+/* ============================================================
+   SOMMAIRE FLOTTANT
+   Se construit seul sur les pages comportant au moins trois
+   articles identifiés. Placé dans la marge gauche, il suit la
+   lecture et marque la fiche en cours. Disparaît dès que la
+   fenêtre n'est plus assez large pour l'accueillir sans empiéter
+   sur le texte.
+   ============================================================ */
+
+.toc{
+  position:fixed;
+  top:50%;
+  left:40px;
+  transform:translateY(-50%);
+  z-index:3;
+  max-height:76vh;
+  overflow-y:auto;
+  padding:4px 0 4px 18px;
+  border-left:var(--hair) solid var(--line);
+  scrollbar-width:none;
+}
+.toc::-webkit-scrollbar{ display:none; }
+
+.toc-label{
+  font-size:9px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--line-strong);
+  font-weight:500;
+  margin:0 0 14px;
+}
+
+/* Deux lignes au maximum. Le rembourrage est porté par la marge et
+   non par la boîte : à l'intérieur d'un -webkit-box, il fausse le
+   calcul de hauteur et laisse déborder une troisième ligne sur
+   l'entrée suivante. La hauteur est verrouillée explicitement. */
+.toc a{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-decoration:none;
+  font-size:10.5px;
+  line-height:1.45;
+  max-height:calc(10.5px * 1.45 * 2);
+  margin:7px 0;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--ink-faint);
+  transition:color .2s ease, transform .25s cubic-bezier(.2,.8,.3,1);
+  position:relative;
+  max-width:168px;
+}
+.toc a:hover{ color:var(--ink); transform:translateX(3px); }
+
+/* fiche en cours de lecture */
+.toc a.current{ color:var(--accent); }
+.toc a.current::before{
+  content:"";
+  position:absolute;
+  left:-19px;
+  top:calc(10.5px * 1.45 / 2);
+  width:9px;
+  height:var(--hair);
+  background:var(--accent);
+}
+
+@media (max-width:1180px){
+  .toc{ display:none; }
+}
+
+/* ============================================================
+   RETOUR EN HAUT
+   Apparaît après un écran et demi de défilement, sur n'importe
+   quelle page assez longue. Rien à déclarer.
+   ============================================================ */
+
+.to-top{
+  position:fixed;
+  right:34px;
+  bottom:34px;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg);
+  border:var(--hair) solid var(--line-strong);
+  border-radius:var(--radius);
+  color:var(--ink-soft);
+  font-size:15px;
+  line-height:1;
+  cursor:pointer;
+  padding:0;
+  z-index:4;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(8px);
+  transition:opacity .3s ease, transform .3s ease, visibility .3s,
+             background .2s ease, border-color .2s ease, color .2s ease;
+}
+.to-top.visible{ opacity:1; visibility:visible; transform:translateY(0); }
+.to-top:hover{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+
+@media (max-width:640px){
+  .to-top{ right:18px; bottom:18px; width:38px; height:38px; }
+}
+
+/* ============================================================
+   DONNÉE EXPURGÉE
+   Signal corrompu à l'emplacement d'une donnée personnelle. Le
+   contenu n'est pas masqué : il n'existe pas. Aucune chaîne à
+   révéler, ni dans le HTML, ni dans le script.
+
+   Le comportement raconte une lutte plutôt qu'une censure : par
+   moments quelque chose sonde et la donnée commence à se former,
+   puis le système riposte et la disloque. Voir rnrd.js.
+
+   Aucune bordure, aucun rembourrage, aucun débordement masqué :
+   un élément en ligne dont le débordement est coupé voit sa ligne
+   de base calée sur le bas de sa boîte, ce qui décale le texte
+   qui l'entoure.
+   ============================================================ */
+
+.redacted{
+  display:inline-block;
+  width:9ch;
+  font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size:.84em;
+  letter-spacing:0;
+  color:var(--ink-soft);
+  text-align:center;
+  white-space:nowrap;
+  user-select:none;
+  position:relative;
+}
+
+/* chaque caractère porte son intensité et son décalage propres */
+.redacted > span{
+  display:inline-block;
+  width:1ch;
+  text-align:center;
+  will-change:opacity, transform;
+}
+
+/* — riposte : le système disloque la donnée — */
+.redacted.surge{
+  color:var(--ink);
+}
+.redacted.surge > span{
+  animation:secousse .09s steps(2, end) infinite;
+}
+@keyframes secousse{
+  0%   { transform:translate(0, 0); }
+  50%  { transform:translate(.5px, -1px); }
+  100% { transform:translate(-.5px, 1px); }
+}
+
+/* — sonde : quelque chose cherche à lire, la donnée s'affermit — */
+.redacted.probe{
+  color:var(--ink);
+}
+
+/* ============================================================
+   PIED DE PAGE
+   ============================================================ */
+
+footer.site-footer{
+  margin-top:96px;
+  padding-top:24px;
+  border-top:var(--hair) solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  font-size:10px;
+  letter-spacing:.2em;
+  color:var(--ink-faint);
+  text-transform:uppercase;
+  font-weight:500;
+  position:relative;
+  z-index:2;
+}
+footer.site-footer a{
+  text-decoration:none;
+  color:var(--ink-faint);
+  transition:color .2s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+}
+/* mention des liens affiliés : à activer le jour venu, dans le pied
+   de page des articles concernés (obligation légale de transparence) */
+.affiliate-notice{
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  font-weight:500;
+  margin:0;
+  text-align:center;
+  padding-top:14px;
+}
+footer.site-footer a:hover{ color:var(--ink); }
+footer.site-footer a .chev{ transition:transform .25s ease; display:inline-block; font-size:13px; }
+footer.site-footer a:hover .chev{ transform:translateX(4px); }

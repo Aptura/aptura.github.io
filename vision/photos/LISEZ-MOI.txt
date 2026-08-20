@@ -1,0 +1,12 @@
+Déposer ici les photographies des tests Retex.
+
+Avant publication, passer chaque photo par :
+    python3 outils/nettoyer_images.py --appliquer
+
+Ce nettoyage supprime les métadonnées, dont les COORDONNÉES GPS que
+les téléphones enregistrent par défaut. Publier une photo de bivouac
+sans la nettoyer revient à publier l'emplacement du bivouac.
+
+Ne jamais pointer vers une image hébergée ailleurs (site d'un
+fabricant, réseau social) : le navigateur du visiteur irait la
+chercher, transmettant son adresse IP à ce site.

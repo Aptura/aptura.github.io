@@ -1,0 +1,18 @@
+Déposer ici les sept fichiers .woff2 :
+
+  inter-v20-latin-300.woff2
+  inter-v20-latin-regular.woff2
+  inter-v20-latin-500.woff2
+  manrope-v20-latin-200.woff2
+  manrope-v20-latin-300.woff2
+  manrope-v20-latin-regular.woff2
+  manrope-v20-latin-500.woff2
+
+Les noms doivent correspondre exactement à ceux déclarés dans
+assets/rnrd.css (bloc @font-face en haut du fichier).
+
+Si tu télécharges une version plus récente (v21, v22...), il faudra
+mettre à jour les noms dans rnrd.css ET les deux balises <link
+rel="preload"> présentes dans l'en-tête de chaque page HTML.
+
+Ce fichier peut être supprimé une fois les polices en place.
