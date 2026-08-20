@@ -589,6 +589,19 @@
      ---------------------------------------------------------- */
   function pad2(n){ return ('0' + n).slice(-2); }
 
+  /* Coupe un titre trop long à la dernière limite de mot utile.
+     La troncature se fait ici plutôt qu'en CSS : les propriétés de
+     limitation du nombre de lignes restent inégalement appliquées
+     d'un navigateur à l'autre, et laissent parfois une ligne
+     déborder sur l'entrée suivante. */
+  function tronquer(texte, maxi){
+    if(texte.length <= maxi) return texte;
+    var coupe = texte.slice(0, maxi);
+    var espace = coupe.lastIndexOf(' ');
+    if(espace > maxi * 0.55){ coupe = coupe.slice(0, espace); }
+    return coupe.replace(/[\s,;:.–—-]+$/, '') + '\u2026';
+  }
+
   function initToc(){
     // Deux cas de figure, une seule mécanique.
     // A. Page réunissant plusieurs articles identifiés (Terrain) :
@@ -630,6 +643,7 @@
         var num = cible.querySelector('.h2-index');
         texte = cible.textContent.replace(num ? num.textContent : '', '').trim();
       }
+      texte = tronquer(texte, 26);
 
       var a = document.createElement('a');
       a.href = '#' + cible.id;
@@ -835,22 +849,37 @@
   /* ----------------------------------------------------------
      DÉMARRAGE
      ---------------------------------------------------------- */
+  /* Chaque module est isolé : si l'un échoue — navigateur ancien,
+     page particulière, contenu inattendu — les autres continuent de
+     fonctionner. Sans cela, une seule erreur laisse la page sans
+     décor, sans sommaire et sans brouillage, sans rien indiquer.
+     L'avertissement en console dit lequel a lâché. */
+  function lancer(nom, fn){
+    try{
+      fn();
+    }catch(e){
+      if(window.console && console.warn){
+        console.warn('RNRD — module « ' + nom + ' » interrompu :', e);
+      }
+    }
+  }
+
   function start(){
-    initChrome();
-    initYear();
-    initEdgeNotes();
-    initCounts();
-    initTyping();
-    initInventaire();
-    initSignalStatus();
-    initToc();
-    initToTop();
-    initRedacted();
-    initArticleList();
-    initCarousels();
-    initImageFade();
-    initReadProgress();
-    initPageTransition();
+    lancer('decor',       initChrome);
+    lancer('expurge',     initRedacted);
+    lancer('annee',       initYear);
+    lancer('annotations', initEdgeNotes);
+    lancer('compteurs',   initCounts);
+    lancer('frappe',      initTyping);
+    lancer('inventaire',  initInventaire);
+    lancer('station',     initSignalStatus);
+    lancer('sommaire',    initToc);
+    lancer('retour',      initToTop);
+    lancer('articles',    initArticleList);
+    lancer('carrousels',  initCarousels);
+    lancer('images',      initImageFade);
+    lancer('lecture',     initReadProgress);
+    lancer('transition',  initPageTransition);
   }
 
   if(document.readyState === 'loading'){

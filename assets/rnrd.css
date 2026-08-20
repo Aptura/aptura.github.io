@@ -1679,14 +1679,13 @@ a.journal-date:hover .journal-day{ color:var(--accent); }
   margin:0 0 14px;
 }
 
-/* Deux lignes au maximum. Le rembourrage est porté par la marge et
-   non par la boîte : à l'intérieur d'un -webkit-box, il fausse le
-   calcul de hauteur et laisse déborder une troisième ligne sur
-   l'entrée suivante. La hauteur est verrouillée explicitement. */
+/* Deux lignes au maximum. La coupe du texte est faite par le script
+   (voir « tronquer » dans rnrd.js) plutôt que par les propriétés de
+   limitation de lignes, inégalement appliquées d'un navigateur à
+   l'autre : elles laissaient parfois une troisième ligne déborder
+   sur l'entrée suivante. Ici, la hauteur est simplement verrouillée. */
 .toc a{
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
+  display:block;
   overflow:hidden;
   text-decoration:none;
   font-size:10.5px;

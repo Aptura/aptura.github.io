@@ -1065,7 +1065,36 @@ vérification d'état du récepteur radio, qui interroge
 
 ---
 
-## 16. Entretien courant
+## 16. Cache du navigateur
+
+Les feuilles de style et le script portent un numéro de version dans
+leur adresse :
+
+```html
+<link rel="stylesheet" href="assets/rnrd.css?v=3">
+<script src="assets/rnrd.js?v=3"></script>
+```
+
+**Après chaque modification de `rnrd.css`, `rnrd-terrain.css` ou
+`rnrd.js`, incrémenter ce numéro dans toutes les pages.** Sans cela,
+les navigateurs continuent de servir l'ancienne version pendant des
+heures ou des jours, et les corrections semblent sans effet — c'est
+la cause la plus fréquente d'un « bug qui persiste après
+publication ».
+
+Commande pour tout mettre à jour d'un coup :
+
+```bash
+grep -rl 'rnrd.*\.\(css\|js\)?v=' --include='*.html' . \
+  | xargs sed -i 's/?v=[0-9]*/?v=4/g'
+```
+
+Pour vérifier qu'une page charge bien la dernière version : recharger
+en forçant le cache (Ctrl+Maj+R), puis comparer.
+
+---
+
+## 17. Entretien courant
 
 Le site est en ligne. Cette liste remplace celle de la mise en ligne
 initiale.
@@ -1114,7 +1143,7 @@ initiale.
 
 ---
 
-## 17. Quand le site grandira
+## 18. Quand le site grandira
 
 Le référencement et le plan du site restent valables en l'état
 jusqu'à un certain volume. Voici les seuils réels et ce qu'il faudra
@@ -1172,7 +1201,7 @@ maintenance particulière.
 
 ---
 
-## 18. Points de vigilance
+## 19. Points de vigilance
 
 - **Ne jamais oublier l'étape 4** (déclarer l'article dans `ARTICLES`).
   C'est le seul lien manuel du système, donc le seul oubli possible.
