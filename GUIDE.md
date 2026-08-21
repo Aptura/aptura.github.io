@@ -587,7 +587,60 @@ pas : elle reste en « À venir ».
 
 ---
 
-## 7. Les photos
+## 7. La section Prévoyance
+
+Même structure que Terrain : toutes les fiches dans une seule page,
+codes `PRV-XX`, groupes par étape, mode terrain. Se reporter à la
+section 6 pour la marche à suivre, elle est identique.
+
+### Exigences propres à cette section
+
+Le contenu touche à la sécurité des personnes et cite des dispositifs
+administratifs qui évoluent. Trois règles s'ajoutent à celles de
+Terrain :
+
+- **S'appuyer sur les sources publiques françaises** — Géorisques,
+  guide gouvernemental *Tous responsables*, sécurité civile — et non
+  sur des contenus de préparation individuelle non sourcés.
+- **Ne jamais encourager l'initiative isolée sur un lieu de crise.**
+  L'aide utile est celle qui a été demandée par la commune, la
+  préfecture ou une association agréée.
+- **Dater ce qui peut changer.** Les dispositifs d'alerte, les
+  obligations d'équipement et les recommandations chiffrées évoluent :
+  vérifier les chiffres cités une fois par an, et corriger plutôt que
+  laisser vieillir.
+
+### Référencement de cette section
+
+C'est la page du site la plus susceptible d'être trouvée par
+recherche, parce qu'elle répond à des questions que les gens posent
+réellement. Quatre points la portent :
+
+- **Le titre de la balise** contient les termes cherchés et tient
+  sous 60 caractères, au-delà desquels il est tronqué dans les
+  résultats.
+- **La description** fait 155 caractères et cite les expressions
+  courantes — kit d'urgence 72h, risques de sa commune.
+- **Les données structurées** décrivent la page comme une liste
+  ordonnée de fiches, chacune avec son ancre.
+- **Les liens croisés** avec Terrain : chaque section renvoie vers
+  l'autre depuis son encadré d'introduction. C'est ce qui répartit
+  l'autorité entre les pages, et il faut le refaire à chaque nouvelle
+  section.
+
+Le reste tient au contenu : des intertitres qui posent une question
+réelle, des sources publiques citées, et pas de bourrage de mots-clés.
+
+### Ce qui reste hors sujet
+
+Cette section ne traite ni d'armement, ni de scénarios
+d'effondrement, ni de retrait hors de la société. Le cadrage annoncé
+dans l'encadré d'introduction — l'intelligence de la préservation
+plutôt que la posture — engage tout le contenu qui suit.
+
+---
+
+## 8. Les photos
 
 - **Format libre** partout sauf les vignettes de la liste d'articles,
   qui sont recadrées en 4:3 pour garder un rythme régulier.
@@ -602,7 +655,7 @@ pas : elle reste en « À venir ».
 
 ---
 
-## 8. Ce qui fonctionne tout seul
+## 9. Ce qui fonctionne tout seul
 
 Rien de tout cela n'est à déclarer dans une page. Chaque comportement
 se déclenche en détectant ce qu'il trouve.
@@ -667,7 +720,7 @@ Où trouver la documentation de chaque composant.
 
 ---
 
-## 9. Vocabulaire graphique
+## 10. Vocabulaire graphique
 
 Quatre éléments structurent l'apparence du site. Les connaître évite
 d'en inventer d'autres qui feraient doublon.
@@ -686,6 +739,15 @@ fois par page :
 
 Volontairement au seuil de la lisibilité : c'est une indication de
 bord, pas une information à lire. Masqué sous 900 px et à l'impression.
+
+**Sommaire** — deux niveaux partout : le repère au-dessus, le titre en
+dessous. Le repère est le code de série pour un article codé
+(`TER-01`, `PRV-01`), le numéro de section pour une subdivision de
+document (`01`, `02`). Cette distinction est délibérée et constitue la
+règle de nommage du site : **un préfixe désigne un document citable
+séparément, un numéro nu une partie d'un document**. Donner un préfixe
+aux sections de « Le projet » leur prêterait un statut qu'elles n'ont
+pas, et répéterait une information que le titre de la page porte déjà.
 
 **Numérotation** — tout ce qui forme une série est numéroté sur deux
 chiffres : les sections de la page d'accueil (`01`–`04`), les articles
@@ -787,7 +849,7 @@ vocation à être indexé.
 
 ### Le mode terrain
 
-**Retex et Terrain partagent le mode terrain.** Les deux réunissent
+**Retex, Terrain et Prévoyance partagent le mode terrain.** Les deux réunissent
 du contenu de référence — fiches techniques, mesures, procédures —
 et se lisent souvent dehors ou en préparation de sortie. Le reste du
 site (accueil, Carnet, Vision, Nécessaire, Projet, Histoire) conserve
@@ -896,7 +958,7 @@ le texte tressaute.
 
 ---
 
-## 10. Modifier l'apparence
+## 11. Modifier l'apparence
 
 Toutes les couleurs et les mesures de base sont regroupées en haut de
 `assets/rnrd.css`, dans le bloc `:root`. Les modifier là suffit à
@@ -921,7 +983,7 @@ chiffre porte une information réelle.
 
 ---
 
-## 11. Polices
+## 12. Polices
 
 Les polices sont hébergées dans `assets/fonts/`. Le site n'envoie
 aucune requête vers un serveur extérieur : rien n'est transmis à
@@ -939,7 +1001,7 @@ de chaque page HTML.
 
 ---
 
-## 12. Réglage des animations
+## 13. Réglage des animations
 
 Les animations tournent en permanence, indépendamment du réglage
 « effets d'animation » de Windows ou macOS.
@@ -957,7 +1019,7 @@ brèves et de faible amplitude, mais le basculer rend le site conforme.
 
 ---
 
-## 13. Impression
+## 14. Impression
 
 Un article s'imprime proprement sans réglage : les repères d'écran
 disparaissent, le carrousel se déplie en colonne, l'adresse des liens
@@ -968,7 +1030,7 @@ Les vidéos sont retirées de la version imprimée.
 
 ---
 
-## 14. Référencement
+## 15. Référencement
 
 Chaque page comporte un titre, une description, une adresse canonique
 et des métadonnées de partage (l'aperçu qui s'affiche quand un lien
@@ -990,7 +1052,7 @@ ne compense un contenu creux.
 
 ---
 
-## 15. Confidentialité
+## 16. Confidentialité
 
 Le nom n'apparaît **nulle part** sur le site : ni dans les textes, ni
 dans les descriptions, ni dans les données structurées, ni dans les
@@ -1065,7 +1127,7 @@ vérification d'état du récepteur radio, qui interroge
 
 ---
 
-## 16. Cache du navigateur
+## 17. Cache du navigateur
 
 Les feuilles de style et le script portent un numéro de version dans
 leur adresse :
@@ -1094,7 +1156,7 @@ en forçant le cache (Ctrl+Maj+R), puis comparer.
 
 ---
 
-## 17. Entretien courant
+## 18. Entretien courant
 
 Le site est en ligne. Cette liste remplace celle de la mise en ligne
 initiale.
@@ -1143,7 +1205,7 @@ initiale.
 
 ---
 
-## 18. Quand le site grandira
+## 19. Quand le site grandira
 
 Le référencement et le plan du site restent valables en l'état
 jusqu'à un certain volume. Voici les seuils réels et ce qu'il faudra
@@ -1201,7 +1263,7 @@ maintenance particulière.
 
 ---
 
-## 19. Points de vigilance
+## 20. Points de vigilance
 
 - **Ne jamais oublier l'étape 4** (déclarer l'article dans `ARTICLES`).
   C'est le seul lien manuel du système, donc le seul oubli possible.

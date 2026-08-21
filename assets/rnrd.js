@@ -635,19 +635,42 @@
       // en attribue un, stable, pour pouvoir l'atteindre par lien
       if(!cible.id){ cible.id = 'sct-' + pad2(i + 1); }
 
-      var texte;
+      // Deux niveaux partout : repère au-dessus, titre en dessous.
+      // Dans une marge étroite, cette forme se lit mieux qu'une ligne
+      // unique, et elle est identique d'une page à l'autre.
+      //
+      // Le repère est le code de série pour un article codé (TER-01),
+      // le numéro de section pour une partie de document (01). La
+      // distinction est voulue : un préfixe désigne un document
+      // citable, un numéro nu une subdivision.
+      var repere, titre;
+
       if(mode === 'articles'){
         var code = cible.querySelector('.eyebrow');
-        texte = code ? code.textContent.trim() : cible.id.toUpperCase();
+        var h2 = cible.querySelector('h2');
+        repere = code ? code.textContent.trim() : pad2(i + 1);
+        titre = h2 ? h2.textContent.trim() : cible.id;
+        var num0 = h2 ? h2.querySelector('.h2-index') : null;
+        if(num0){ titre = titre.replace(num0.textContent, '').trim(); }
       } else {
         var num = cible.querySelector('.h2-index');
-        texte = cible.textContent.replace(num ? num.textContent : '', '').trim();
+        repere = num ? num.textContent.trim() : pad2(i + 1);
+        titre = cible.textContent.replace(num ? num.textContent : '', '').trim();
       }
-      texte = tronquer(texte, 26);
 
       var a = document.createElement('a');
       a.href = '#' + cible.id;
-      a.textContent = texte;
+
+      var c = document.createElement('span');
+      c.className = 'toc-code';
+      c.textContent = repere;
+      a.appendChild(c);
+
+      var t = document.createElement('span');
+      t.className = 'toc-title';
+      t.textContent = tronquer(titre, 34);
+      a.appendChild(t);
+
       nav.appendChild(a);
       liens.push({ a:a, art:cible });
     });

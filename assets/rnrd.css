@@ -1279,6 +1279,13 @@ article.body a[href^="http"]::after,
 /* Liens dans le corps de texte : soulignement fin décollé du texte,
    qui s'épaissit au survol. Plus net qu'un simple changement de
    couleur, moins lourd qu'un soulignement plein. */
+/* Les liens hors corps d'article — encadrés, chapô, avertissements —
+   doivent recevoir le même traitement, sans quoi le navigateur applique
+   son bleu souligné par défaut et rompt la mise en forme. */
+.brief p a,
+.warn p a,
+.note p a,
+.lede a,
 article.body p a,
 .journal-body p a{
   color:var(--ink);
@@ -1287,6 +1294,10 @@ article.body p a,
   padding-bottom:1px;
   transition:border-color .2s ease;
 }
+.brief p a:hover,
+.warn p a:hover,
+.note p a:hover,
+.lede a:hover,
 article.body p a:hover,
 .journal-body p a:hover{ border-color:var(--ink); }
 
@@ -1679,28 +1690,46 @@ a.journal-date:hover .journal-day{ color:var(--accent); }
   margin:0 0 14px;
 }
 
-/* Deux lignes au maximum. La coupe du texte est faite par le script
-   (voir « tronquer » dans rnrd.js) plutôt que par les propriétés de
-   limitation de lignes, inégalement appliquées d'un navigateur à
-   l'autre : elles laissaient parfois une troisième ligne déborder
-   sur l'entrée suivante. Ici, la hauteur est simplement verrouillée. */
+/* Entrée à deux niveaux, identique sur toutes les pages : repère
+   au-dessus, titre en dessous. La coupe du texte est faite par le
+   script (« tronquer » dans rnrd.js) plutôt que par les propriétés
+   CSS de limitation de lignes, inégalement appliquées d'un navigateur
+   à l'autre : elles laissaient une troisième ligne déborder sur
+   l'entrée suivante. */
 .toc a{
   display:block;
-  overflow:hidden;
   text-decoration:none;
-  font-size:10.5px;
-  line-height:1.45;
-  max-height:calc(10.5px * 1.45 * 2);
-  margin:7px 0;
-  letter-spacing:.13em;
-  text-transform:uppercase;
   font-weight:500;
   color:var(--ink-faint);
+  margin:11px 0;
   transition:color .2s ease, transform .25s cubic-bezier(.2,.8,.3,1);
   position:relative;
   max-width:168px;
 }
 .toc a:hover{ color:var(--ink); transform:translateX(3px); }
+
+/* repère : code de série pour un article codé, numéro de section
+   pour une partie de document */
+.toc-code{
+  display:block;
+  font-size:9px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--line-strong);
+  margin-bottom:3px;
+  transition:color .2s ease;
+  font-variant-numeric:tabular-nums;
+}
+.toc-title{
+  display:block;
+  font-size:10px;
+  letter-spacing:.09em;
+  line-height:1.4;
+  text-transform:uppercase;
+  color:inherit;
+}
+.toc a:hover .toc-code{ color:var(--ink-faint); }
+.toc a.current .toc-code{ color:var(--accent); }
 
 /* fiche en cours de lecture */
 .toc a.current{ color:var(--accent); }
@@ -1708,7 +1737,7 @@ a.journal-date:hover .journal-day{ color:var(--accent); }
   content:"";
   position:absolute;
   left:-19px;
-  top:calc(10.5px * 1.45 / 2);
+  top:5px;
   width:9px;
   height:var(--hair);
   background:var(--accent);
