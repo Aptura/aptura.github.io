@@ -573,7 +573,7 @@
     // station arrêtée : un serveur allumé répond bien plus vite
     setTimeout(function(){ verdict(false); }, 3000);
 
-    sonde.src = hote + '/static/gfx/openwebrx-avatar.png' + Date.now();
+    sonde.src = hote + '/static/gfx/openwebrx-avatar.png?t=' + Date.now();
   }
 
 
